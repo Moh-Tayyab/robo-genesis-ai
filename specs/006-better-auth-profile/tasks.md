@@ -35,12 +35,12 @@ Initialize project structure and configure dependencies for Better-Auth integrat
 
 ### Tasks
 
-- [ ] T001 Set up Better-Auth configuration in `frontend/better-auth/config.ts`
-- [ ] T002 Configure Better-Auth with Neon Postgres adapter in `frontend/better-auth/config.ts`
-- [ ] T003 Set up GitHub OAuth provider in Better-Auth configuration
-- [ ] T004 Install Better-Auth dependencies: `better-auth`, `@better-auth/node`, `@better-auth/postgres-adapter`
-- [ ] T005 Create `.env.example` with `BETTER_AUTH_SECRET`, `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `DATABASE_URL`
-- [ ] T006 Configure Docusaurus plugin for Better-Auth integration in `docusaurus.config.js`
+- [x] T001 Set up Better-Auth configuration in `frontend/better-auth/config.ts`
+- [x] T002 Configure Better-Auth with Neon Postgres adapter in `frontend/better-auth/config.ts`
+- [x] T003 Set up GitHub OAuth provider in Better-Auth configuration
+- [x] T004 Install Better-Auth dependencies: `better-auth`, `@better-auth/node`, `@better-auth/postgres-adapter`
+- [x] T005 Create `.env.example` with `BETTER_AUTH_SECRET`, `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `DATABASE_URL`
+- [x] T006 Configure Docusaurus plugin for Better-Auth integration in `docusaurus.config.js`
 
 ## Phase 2: Foundational
 
@@ -48,13 +48,13 @@ Implement foundational components that are required for all user stories.
 
 ### Tasks
 
-- [ ] T007 Create database schema for user_profiles table in Neon Postgres
-- [ ] T008 Implement UserProfile entity model in `frontend/src/models/user-profile.ts`
-- [ ] T009 Create AuthContext for managing authentication state in `frontend/src/contexts/AuthContext.tsx`
-- [ ] T010 Create useAuth hook for authentication in `frontend/src/hooks/useAuth.ts`
-- [ ] T011 Create GlassCard UI component with glassmorphism design in `frontend/src/components/ui/GlassCard.tsx`
-- [ ] T012 Create MultiSelect UI component for skills/hardware selection in `frontend/src/components/ui/MultiSelect.tsx`
-- [ ] T013 Set up API route structure for profile management in `frontend/src/pages/api/profile.ts`
+- [x] T007 Create database schema for user_profiles table in Neon Postgres
+- [x] T008 Implement UserProfile entity model in `frontend/src/models/user-profile.ts`
+- [x] T009 Create AuthContext for managing authentication state in `frontend/src/contexts/AuthContext.tsx`
+- [x] T010 Create useAuth hook for authentication in `frontend/src/hooks/useAuth.ts`
+- [x] T011 Create GlassCard UI component with glassmorphism design in `frontend/src/components/ui/GlassCard.tsx`
+- [x] T012 Create MultiSelect UI component for skills/hardware selection in `frontend/src/components/ui/MultiSelect.tsx`
+- [x] T013 Set up API route structure for profile management in `frontend/src/pages/api/profile.ts`
 
 ## Phase 3: User Story 1 - New User Sign-Up with Profile Capture (Priority: P1)
 
@@ -74,22 +74,22 @@ Implement complete sign-up flow with profile capture functionality, including em
 
 ### Tasks
 
-- [ ] T014 [P] [US1] Create SignUpForm component with email/password fields in `frontend/src/components/auth/SignUpForm.tsx`
-- [ ] T015 [P] [US1] Create GitHub OAuth sign-up button in `frontend/src/components/auth/SignUpForm.tsx`
-- [ ] T016 [P] [US1] Create ProfileForm component for software background collection in `frontend/src/components/auth/ProfileForm.tsx`
-- [ ] T017 [P] [US1] Create ProfileForm component for hardware access collection in `frontend/src/components/auth/ProfileForm.tsx`
-- [ ] T018 [P] [US1] Create ProfileForm component for comfort level selection in `frontend/src/components/auth/ProfileForm.tsx`
-- [ ] T019 [US1] Create signup page with form integration in `frontend/src/pages/signup.tsx`
-- [ ] T020 [P] [US1] Implement POST /api/profile endpoint for profile creation in `frontend/src/pages/api/profile.ts`
-- [ ] T021 [P] [US1] Implement GET /api/profile endpoint for profile retrieval in `frontend/src/pages/api/profile.ts`
-- [ ] T022 [US1] Create welcome page after sign-up in `frontend/src/pages/welcome.tsx`
-- [ ] T023 [US1] Implement client-side redirect flow: `/signup` → profile questions → `/welcome` → textbook home
-- [ ] T024 [US1] Create AuthLayout component for authentication pages in `frontend/src/components/auth/AuthLayout.tsx`
-- [ ] T025 [US1] Implement profile validation logic for software background, hardware access, and comfort level
-- [ ] T026 [US1] Create UserProfile service for database operations in `frontend/src/services/UserProfileService.ts`
-- [ ] T027 [US1] Implement optional profile completion with default values (comfort: 1, hardware: ["None"], software: ["None"])
-- [ ] T028 [US1] Add WCAG 2.2 AA compliance to signup and profile forms
-- [ ] T029 [US1] Implement error handling for profile creation/validation failures
+- [x] T014 [P] [US1] Create SignUpForm component with email/password fields in `frontend/src/components/auth/SignUpForm.tsx`
+- [x] T015 [P] [US1] Create GitHub OAuth sign-up button in `frontend/src/components/auth/GitHubOAuthButton.tsx`
+- [x] T016 [P] [US1] Create ProfileForm component for software background collection in `frontend/src/components/auth/ProfileForm.tsx`
+- [x] T017 [P] [US1] Create ProfileForm component for hardware access collection in `frontend/src/components/auth/ProfileForm.tsx`
+- [x] T018 [P] [US1] Create ProfileForm component for comfort level selection in `frontend/src/components/auth/ProfileForm.tsx`
+- [x] T019 [US1] Create signup page with form integration in `frontend/src/pages/signup.tsx`
+- [x] T020 [P] [US1] Implement POST /api/profile endpoint for profile creation in `frontend/src/pages/api/profile.ts`
+- [x] T021 [P] [US1] Implement GET /api/profile endpoint for profile retrieval in `frontend/src/pages/api/profile.ts`
+- [x] T022 [US1] Create welcome page after sign-up in `frontend/src/pages/welcome.tsx`
+- [x] T023 [US1] Implement client-side redirect flow: `/signup` → profile questions → `/welcome` → textbook home
+- [x] T024 [US1] Create AuthLayout component for authentication pages in `frontend/src/components/auth/AuthLayout.tsx`
+- [x] T025 [US1] Implement profile validation logic for software background, hardware access, and comfort level
+- [x] T026 [US1] Create UserProfile service for database operations in `frontend/src/services/UserProfileService.ts`
+- [x] T027 [US1] Implement optional profile completion with default values (comfort: 1, hardware: ["None"], software: ["None"])
+- [x] T028 [US1] Add WCAG 2.2 AA compliance to signup and profile forms
+- [x] T029 [US1] Implement error handling for profile creation/validation failures
 
 ## Phase 4: User Story 2 - Profile Management Post-Sign-Up (Priority: P2)
 

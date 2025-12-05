@@ -214,7 +214,9 @@ See `.specify/memory/constitution.md` for code quality, testing, performance, se
 - File-based (Markdown/MDX files in `docs/` directory, static assets in `frontend/static/`) (002-chapter-template-system)
 - Python 3.10+ (for code examples), MDX 3.x (for content), TypeScript 5.x (for React components) + Docusaurus 3.x, React 18.x, ROS 2 Humble Hawksbill LTS, rclpy, Prism.js (syntax highlighting), AJV (JSON Schema validation) (005-module-1-ros2-chapters)
 - File-based (Markdown/MDX files in docs/module-1-ros2/, code examples in frontend/static/code-examples/module-1/, diagrams in frontend/static/img/module-1/) (005-module-1-ros2-chapters)
+- Python 3.11, FastAPI, OpenAI SDK, Qdrant, Neon Postgres (001-rag-chatbot)
 
 ## Recent Changes
+- 001-rag-chatbot: Added Python 3.11, FastAPI, OpenAI SDK, Qdrant, Neon Postgres for RAG chatbot backend
 - 005-module-1-ros2-chapters: Added Python 3.10+ (for code examples), MDX 3.x (for content), TypeScript 5.x (for React components) + Docusaurus 3.x, React 18.x, ROS 2 Humble Hawksbill LTS, rclpy, Prism.js (syntax highlighting), AJV (JSON Schema validation)
 - 002-chapter-template-system: Added TypeScript 5.x, React 18.x (Docusaurus 3.x dependency) + Docusaurus 3.x, MDX 3.x, React 18.x, Prism.js (syntax highlighting), AJV (JSON Schema validation)

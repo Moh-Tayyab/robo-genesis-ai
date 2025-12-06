@@ -30,7 +30,7 @@ MVP approach: Start with User Story 1 (Full-book Q&A) as the core functionality,
 - [x] T010 [P] Create database models for Message entity in app/models/message.py
 - [x] T011 [P] Create database models for Retrieval entity in app/models/retrieval.py
 - [x] T012 Create database connection setup in app/database.py
-- [ ] T013 Create database session management in app/database.py
+- [X] T013 Create database session management in app/database.py
 - [x] T014 Create database migrations setup with Alembic
 - [x] T015 [P] Create Qdrant client setup in app/vector_db.py
 - [x] T016 [P] Create OpenAI client setup in app/llm.py
@@ -43,18 +43,18 @@ MVP approach: Start with User Story 1 (Full-book Q&A) as the core functionality,
 
 **Independent Test Criteria**: Can ask questions and verify responses come from book content with proper citations.
 
-- [x] T019 [P] [US1] Create RAG service for full-book queries in app/services/rag_service.py
-- [x] T020 [P] [US1] Implement embedding functionality using OpenAI in app/services/embedding_service.py
-- [x] T021 [P] [US1] Create vector search functionality in app/services/vector_search_service.py
-- [x] T022 [P] [US1] Create prompt builder for full-book RAG in app/services/prompt_service.py
-- [x] T023 [P] [US1] Create chat service for managing conversations in app/services/chat_service.py
-- [x] T024 [P] [US1] Implement POST /chat endpoint in app/api/chat.py
-- [x] T025 [P] [US1] Add request/response models for /chat endpoint in app/schemas/chat.py
-- [x] T026 [US1] Create health check endpoint implementation in app/api/health.py
-- [x] T027 [P] [US1] Add request/response models for health endpoint in app/schemas/health.py
-- [x] T028 [US1] Implement basic chat history persistence in database
-- [x] T029 [US1] Create basic integration test for full-book Q&A flow
-- [x] T030 [US1] Create unit tests for RAG service components
+- [X] T019 [P] [US1] Create RAG service for full-book queries in src/services/rag_service.py
+- [X] T020 [P] [US1] Implement embedding functionality using OpenAI in src/services/embedding_service.py
+- [X] T021 [P] [US1] Create vector search functionality in src/services/vector_search_service.py
+- [X] T022 [P] [US1] Create prompt builder for full-book RAG in src/services/prompt_service.py
+- [X] T023 [P] [US1] Create chat service for managing conversations in src/services/chat_service.py
+- [X] T024 [P] [US1] Implement POST /chat endpoint in src/api/chat.py
+- [X] T025 [P] [US1] Add request/response models for /chat endpoint in src/schemas/chat.py
+- [X] T026 [US1] Create health check endpoint implementation in src/api/health.py
+- [X] T027 [P] [US1] Add request/response models for health endpoint in src/schemas/health.py
+- [X] T028 [US1] Implement basic chat history persistence in database
+- [X] T029 [US1] Create basic integration test for full-book Q&A flow
+- [X] T030 [US1] Create unit tests for RAG service components
 
 ## Phase 4: User Story 2 - Selected-text Q&A (P2)
 
@@ -124,16 +124,16 @@ MVP approach: Start with User Story 1 (Full-book Q&A) as the core functionality,
 
 **Independent Test Criteria**: Student can open the Docusaurus textbook interface, interact with the chatbot UI, ask questions, and receive responses from the backend RAG service.
 
-- [ ] T064 [P] Create API service for chat communication in frontend/src/services/ChatApiService.ts
-- [ ] T065 [P] Update Chatbot component to use real API calls instead of placeholder responses in frontend/src/components/Chatbot.tsx
-- [ ] T066 [P] Add environment configuration for backend API URL in frontend/.env.example and frontend/.env
-- [ ] T067 [P] Implement error handling for API communication in frontend/src/components/Chatbot.tsx
-- [ ] T068 [P] Add loading states and typing indicators that reflect actual backend processing in frontend/src/components/Chatbot.tsx
-- [ ] T069 [P] Update session management to use backend session IDs in frontend/src/components/Chatbot.tsx
-- [ ] T070 [P] Add API response validation and error display in frontend/src/components/Chatbot.tsx
-- [ ] T071 [P] Create integration test for frontend-backend chat communication in frontend/tests/integration/
-- [ ] T072 [P] [US1] Implement full-book Q&A functionality in frontend/src/components/Chatbot.tsx
-- [ ] T073 [P] [US2] Implement selected-text Q&A functionality in frontend/src/components/Chatbot.tsx
+- [X] T064 [P] Create API service for chat communication in frontend/src/services/ChatApiService.ts
+- [X] T065 [P] Update Chatbot component to use real API calls instead of placeholder responses in frontend/src/components/Chatbot.tsx
+- [X] T066 [P] Add environment configuration for backend API URL in frontend/.env.example and frontend/.env
+- [X] T067 [P] Implement error handling for API communication in frontend/src/components/Chatbot.tsx
+- [X] T068 [P] Add loading states and typing indicators that reflect actual backend processing in frontend/src/components/Chatbot.tsx
+- [X] T069 [P] Update session management to use backend session IDs in frontend/src/components/Chatbot.tsx
+- [X] T070 [P] Add API response validation and error display in frontend/src/components/Chatbot.tsx
+- [X] T071 [P] Create integration test for frontend-backend chat communication in frontend/tests/integration/
+- [X] T072 [P] [US1] Implement full-book Q&A functionality in frontend/src/components/Chatbot.tsx
+- [X] T073 [P] [US2] Implement selected-text Q&A functionality in frontend/src/components/Chatbot.tsx
 
 ## Phase 10: Polish & Cross-Cutting Concerns
 

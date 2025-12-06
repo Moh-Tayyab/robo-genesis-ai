@@ -20,11 +20,11 @@
     "lighthouse": "lhci autorun"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.9.2",
     "@docusaurus/preset-classic": "^3.9.2",
     "@docusaurus/theme-search-algolia": "^3.9.2",
     "@mdx-js/react": "^3.0.1",
     "@phosphor-icons/react": "^2.1.10",
+    "better-auth": "^1.4.5",
     "clsx": "^2.1.1",
     "flexsearch": "^0.7.43",
     "framer-motion": "^11.0.28",
@@ -36,6 +36,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@docusaurus/core": "^3.9.2",
     "@docusaurus/module-type-aliases": "^3.5.2",
     "@docusaurus/tsconfig": "^3.9.2",
     "@docusaurus/types": "^3.9.2",

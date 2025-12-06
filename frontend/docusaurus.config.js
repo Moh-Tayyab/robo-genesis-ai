@@ -24,7 +24,11 @@ const config = {
   projectName: 'Physical-AI-Humanoid-Robotics-Textbook', // Usually your repo name.
 
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'throw',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'throw',
+    },
+  },
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -77,6 +81,18 @@ const config = {
             sidebarId: 'tutorialSidebar',
             position: 'left',
             label: 'Textbook',
+          },
+          {
+            to: '/login',
+            label: 'Login',
+            position: 'right',
+            id: 'login-link'
+          },
+          {
+            to: '/signup',
+            label: 'Sign Up',
+            position: 'right',
+            id: 'signup-link'
           },
           {
             href: 'https://github.com/Moh-Tayyab/Physical-AI-Humanoid-Robotics-Textbook',

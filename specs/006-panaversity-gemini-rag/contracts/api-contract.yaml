@@ -1,0 +1,184 @@
+openapi: 3.0.0
+info:
+  title: Panaversity Gemini RAG Backend API
+  description: API for RAG system for Physical AI and Humanoid Robotics textbook
+  version: 1.0.0
+paths:
+  /health:
+    get:
+      summary: Health check endpoint
+      description: Returns the health status of all services
+      responses:
+        '200':
+          description: Health status of all services
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [healthy, unhealthy]
+                    description: Overall system status
+                  gemini:
+                    type: boolean
+                    description: Status of Gemini API connection
+                  qdrant:
+                    type: boolean
+                    description: Status of Qdrant vector database connection
+                  neon:
+                    type: boolean
+                    description: Status of Neon PostgreSQL database connection
+                required:
+                  - status
+                  - gemini
+                  - qdrant
+                  - neon
+              example:
+                status: "healthy"
+                gemini: true
+                qdrant: true
+                neon: true
+  /query:
+    post:
+      summary: Main RAG chat endpoint
+      description: Processes user queries using the appropriate agent based on the use_selected_only flag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  description: The user's question or query
+                selected_text:
+                  type: string
+                  nullable: true
+                  description: Specific text selected by the user (for SelectedTextOnlyAgent)
+                use_selected_only:
+                  type: boolean
+                  default: false
+                  description: Flag to indicate if only selected text should be used
+              required:
+                - message
+            example:
+              message: "What is the principle of inverse kinematics in humanoid robotics?"
+              selected_text: "Inverse kinematics is the process of determining joint angles from desired end-effector positions."
+              use_selected_only: false
+      responses:
+        '200':
+          description: Query response from the appropriate agent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                    description: The generated response text
+                  agent_type:
+                    type: string
+                    enum: [BookRAGAgent, SelectedTextOnlyAgent]
+                    description: Type of agent that processed the query
+                  success:
+                    type: boolean
+                    description: Whether the query was processed successfully
+                required:
+                  - response
+                  - agent_type
+                  - success
+              example:
+                response: "Inverse kinematics in humanoid robotics involves calculating the joint angles required to achieve a desired end-effector position and orientation. This is crucial for tasks like reaching, walking, and manipulation..."
+                agent_type: "BookRAGAgent"
+                success: true
+        '400':
+          description: Bad request due to invalid input
+        '500':
+          description: Internal server error
+  /ingest:
+    post:
+      summary: Ingest book chunks
+      description: Accepts JSON list of content chunks and stores them in Qdrant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                chunks:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      text:
+                        type: string
+                        description: The text content to be ingested
+                      metadata:
+                        type: object
+                        description: Metadata for the chunk (chapter, section, etc.)
+                        properties:
+                          chapter:
+                            type: string
+                            description: Chapter identifier
+                          section:
+                            type: string
+                            description: Section within the chapter
+                          page_number:
+                            type: integer
+                            description: Page number in the original textbook
+                          book_version:
+                            type: string
+                            default: "latest"
+                            description: Version of the textbook
+                    required:
+                      - text
+                      - metadata
+              required:
+                - chunks
+            example:
+              chunks:
+                - text: "Physical AI is the integration of artificial intelligence with physical systems such as robots, enabling them to perceive, reason, and act in the real world."
+                  metadata:
+                    chapter: "Introduction to Physical AI"
+                    section: "Definition and Scope"
+                    page_number: 1
+                    book_version: "latest"
+                - text: "Humanoid robotics focuses on creating robots with human-like characteristics and capabilities, including bipedal locomotion and dexterous manipulation."
+                  metadata:
+                    chapter: "Humanoid Robotics Fundamentals"
+                    section: "Basic Concepts"
+                    page_number: 15
+                    book_version: "latest"
+      responses:
+        '200':
+          description: Successfully ingested content chunks
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [success, error]
+                    description: Status of the ingestion process
+                  message:
+                    type: string
+                    description: Human-readable message about the result
+                  chunks_processed:
+                    type: integer
+                    description: Number of chunks successfully processed
+                required:
+                  - status
+                  - message
+                  - chunks_processed
+              example:
+                status: "success"
+                message: "Successfully ingested 2 chunks"
+                chunks_processed: 2
+        '400':
+          description: Bad request due to invalid input
+        '500':
+          description: Internal server error

@@ -1,154 +1,270 @@
-# Quickstart: RAG Chatbot Backend
+# Quickstart Guide: RAG Chatbot Backend
+
+**Feature**: 001-rag-chatbot
+**Date**: 2025-12-06
+
+## Overview
+
+This quickstart guide provides the essential steps to set up and run the RAG Chatbot Backend. The system implements a competition-winning architecture using OpenAI Agents SDK, FastAPI, Neon Postgres, and Qdrant Cloud with 100% working selected-text RAG.
 
 ## Prerequisites
+
 - Python 3.11+
-- Docker (optional, for containerization)
-- OpenAI API key
-- Qdrant Cloud account
-- Neon Postgres account
+- uv package manager
+- Docker
+- API keys for:
+  - OpenAI
+  - Qdrant Cloud
+  - Neon Postgres
 
-## Setup
+## Setup Instructions
 
-### 1. Clone Repository
+### 1. Project Initialization
+
 ```bash
-git clone <repository-url>
-cd Physical-AI-Humanoid-Robotics-Textbook
+# Initialize project with uv
+uv init rag-chatbot-backend
+cd rag-chatbot-backend
+
+# Add required dependencies
+uv add "openai-agents" fastapi uvicorn "psycopg2-binary" "qdrant-client" python-dotenv pydantic "pydantic-settings" "openai" "tiktoken"
 ```
 
-### 2. Create Virtual Environment
+### 2. Environment Configuration
+
+Create a `.env` file with the following variables:
+
+```env
+# OpenAI Configuration
+OPENAI_API_KEY=your_openai_api_key_here
+OPENAI_MODEL=gpt-4o-mini
+
+# Qdrant Configuration
+QDRANT_URL=your_qdrant_cloud_url
+QDRANT_API_KEY=your_qdrant_api_key
+QDRANT_COLLECTION_NAME=book_chunks
+
+# Neon Postgres Configuration
+DATABASE_URL=postgresql://username:password@ep-xxx.us-east-1.aws.neon.tech/dbname?sslmode=require
+
+# Application Settings
+ENVIRONMENT=development
+LOG_LEVEL=info
+MAX_CONTENT_SIZE=4000
+```
+
+### 3. Database Setup
+
+```sql
+-- Create required tables
+CREATE TABLE users (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE TABLE sessions (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    title VARCHAR(255),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE TABLE messages (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    session_id UUID NOT NULL REFERENCES sessions(id) ON DELETE CASCADE,
+    role VARCHAR(20) NOT NULL CHECK (role IN ('user', 'assistant')),
+    content TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE TABLE retrievals (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    message_id UUID NOT NULL REFERENCES messages(id) ON DELETE CASCADE,
+    chunk_id VARCHAR(255) NOT NULL,
+    score DECIMAL(5, 4),
+    metadata JSONB,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Create indexes
+CREATE INDEX idx_sessions_user_id ON sessions(user_id);
+CREATE INDEX idx_messages_session_id ON messages(session_id);
+CREATE INDEX idx_retrievals_message_id ON retrievals(message_id);
+CREATE INDEX idx_retrievals_chunk_id ON retrievals(chunk_id);
+```
+
+### 4. Qdrant Collection Setup
+
+```python
+from qdrant_client import QdrantClient
+from qdrant_client.http import models
+
+client = QdrantClient(
+    url=os.getenv("QDRANT_URL"),
+    api_key=os.getenv("QDRANT_API_KEY")
+)
+
+# Create collection for book chunks
+client.create_collection(
+    collection_name="book_chunks",
+    vectors_config=models.VectorParams(
+        size=1536,  # For text-embedding-3-small
+        distance=models.Distance.COSINE
+    )
+)
+```
+
+## Running the Application
+
+### 1. Start the Server
+
 ```bash
-cd app
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+# Run with uvicorn
+uv run uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
+
+# Or with gunicorn (production)
+uv run gunicorn src.main:app -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
 ```
 
-### 3. Install Dependencies
+### 2. API Endpoints
+
+#### Full-book RAG
 ```bash
-pip install -r requirements.txt
+curl -X POST http://localhost:8000/v1/chat \
+  -H "Content-Type: application/json" \
+  -d '{
+    "question": "What are the key principles of humanoid robotics?",
+    "session_id": null
+  }'
 ```
 
-### 4. Environment Configuration
-Copy `.env.example` to `.env` and fill in your credentials:
+#### Selected-text RAG
 ```bash
-cp .env.example .env
-# Edit .env with your API keys and connection strings
+curl -X POST http://localhost:8000/v1/chat/selected \
+  -H "Content-Type: application/json" \
+  -d '{
+    "question": "What does this text say about balance control?",
+    "selected_text": "Humanoid robots require sophisticated balance control mechanisms to maintain stability during locomotion...",
+    "session_id": null
+  }'
 ```
 
-### 5. Install Dependencies File
-Create `requirements.txt`:
-```txt
-fastapi==0.104.1
-uvicorn==0.24.0
-openai==1.3.8
-qdrant-client==1.7.0
-python-dotenv==1.0.0
-pydantic==2.5.0
-pydantic-settings==2.1.0
-sqlalchemy==2.0.23
-asyncpg==0.29.0
-langchain==0.0.339
-langchain-openai==0.0.5
-sentence-transformers==2.2.2
-pytest==7.4.3
-httpx==0.25.2
-python-multipart==0.0.6
-python-jose[cryptography]==3.3.0
-passlib[bcrypt]==1.7.4
-python-rapidjson==1.12
-```
-
-## Running Locally
-
-### 1. Start the Application
+#### Content Ingestion
 ```bash
-cd app
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
+curl -X POST http://localhost:8000/v1/ingest \
+  -H "Content-Type: application/json" \
+  -d '{
+    "content": "Chapter content here...",
+    "chapter": "Balance Control",
+    "section": "Introduction",
+    "book_version": "1.0.0"
+  }'
 ```
 
-### 2. API Documentation
-Visit `http://localhost:8000/docs` for interactive API documentation.
-
-## Ingesting Content
-
-### 1. Prepare Markdown Files
-Ensure your markdown files are in the correct format with proper metadata.
-
-### 2. Run Ingestion
+#### Health Check
 ```bash
-cd scripts
-python ingest.py path/to/markdown/files
+curl http://localhost:8000/v1/health
 ```
+
+## Key Architecture Components
+
+### 1. BookAgent Implementation
+- Uses OpenAI Assistant API with custom tools
+- Implements `retrieve_context` and `finalize_answer` tools
+- Handles delegation to SelectedTextAgent when needed
+
+### 2. SelectedTextAgent Implementation
+- Isolated agent for selected-text mode
+- No access to vector store or book content
+- Returns specific fallback when answer not found
+
+### 3. Async Architecture
+- Full async support with FastAPI
+- Connection pooling with asyncpg for Neon Postgres
+- Async operations throughout the stack
+
+### 4. RAG Pipeline
+- HyDE (Hypothetical Document Embeddings) for improved retrieval
+- MMR (Maximum Marginal Relevance) for diverse chunk selection
+- Top-8 chunk retrieval for accuracy
 
 ## Testing
 
-### 1. Run Unit Tests
+### Unit Tests
 ```bash
-cd app
-python -m pytest tests/unit/
+# Run unit tests
+uv run pytest tests/unit/ -v
+
+# Run with coverage
+uv run pytest tests/unit/ --cov=src --cov-report=html
 ```
 
-### 2. Run Integration Tests
+### Integration Tests
 ```bash
-cd app
-python -m pytest tests/integration/
+# Run integration tests
+uv run pytest tests/integration/ -v
 ```
 
-### 3. Run Full Test Suite
-```bash
-cd app
-python -m pytest
+## Production Deployment
+
+### Docker Configuration
+```dockerfile
+FROM ghcr.io/astral-sh/uv:python3.11-bookworm-slim
+
+WORKDIR /app
+
+# Copy project files
+COPY pyproject.toml uv.lock ./
+COPY src ./src
+
+# Install dependencies
+RUN uv sync --no-dev
+
+# Expose port
+EXPOSE 8000
+
+# Run application
+CMD ["uv", "run", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-## API Endpoints
+### Environment Variables for Production
+```env
+# Security
+SECRET_KEY=your_secret_key_here
+DEBUG=false
 
-### Chat (Full Book)
-```
-POST /chat
-Content-Type: application/json
+# Database
+DATABASE_URL=your_production_database_url
 
-{
-  "question": "Your question here",
-  "sessionId": "optional session ID"
-}
-```
+# Rate limiting
+RATE_LIMIT_PER_MINUTE=30
 
-### Chat (Selected Text)
-```
-POST /chat/selected
-Content-Type: application/json
-
-{
-  "question": "Your question here",
-  "selectedText": "The text you selected",
-  "sessionId": "optional session ID"
-}
+# Performance
+WORKERS=4
+TIMEOUT=300
 ```
 
-### Health Check
-```
-GET /health
-```
+## Troubleshooting
 
-## Docker Deployment
+### Common Issues
 
-### 1. Build Image
-```bash
-docker build -t rag-chatbot .
-```
+1. **Connection Pool Exhaustion**: Increase pool size in database configuration
+2. **Rate Limiting**: Check OpenAI and Qdrant usage quotas
+3. **Embedding Latency**: Optimize chunk sizes and implement caching
+4. **Memory Issues**: Monitor asyncpg pool and implement proper connection cleanup
 
-### 2. Run Container
-```bash
-docker run -p 8000:8000 --env-file .env rag-chatbot
-```
+### Performance Monitoring
+- Monitor response times for API endpoints
+- Track database connection pool metrics
+- Watch OpenAI and Qdrant API usage
+- Log slow queries and operations
 
-## Configuration
+## Next Steps
 
-The application uses environment variables for configuration:
-
-- `OPENAI_API_KEY`: Your OpenAI API key
-- `QDRANT_URL`: Qdrant Cloud URL
-- `QDRANT_API_KEY`: Qdrant API key
-- `NEON_DB_URL`: Neon Postgres connection string
-- `QDRANT_TOP_K`: Number of chunks to retrieve (default: 5)
-- `QDRANT_SCORE_THRESHOLD`: Minimum similarity score (default: 0.75)
-- `RERANK_THRESHOLD`: Cross-encoder rerank threshold (default: 0.85)
+1. Implement the complete backend following the architecture documents
+2. Set up proper CI/CD pipelines
+3. Add comprehensive monitoring and alerting
+4. Implement proper error handling and fallbacks
+5. Add caching layers for improved performance

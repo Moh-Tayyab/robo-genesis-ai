@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PaperPlaneRight, X, Robot } from 'phosphor-react';
+import { chatApiService, ChatRequest } from '../services/ChatApiService';
 
 // ===== TYPES =====
 interface Message {
@@ -63,6 +64,7 @@ export default function Chatbot({ onSend }: ChatbotProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [sessionId, setSessionId] = useState<string | null>(null); // Track session ID
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const focusTrapRef = useFocusTrap(isOpen);
@@ -93,9 +95,23 @@ export default function Chatbot({ onSend }: ChatbotProps) {
     return () => document.removeEventListener('keydown', handleEscape);
   }, [isOpen]);
 
-  const handleSend = () => {
+  // Reset session when chat is closed
+  useEffect(() => {
+    if (!isOpen) {
+      // Optionally preserve session for some time, or clear it
+      // For now, we'll keep the session so conversation history persists
+      // If you want to clear session when closed, uncomment the next line:
+      // setSessionId(null);
+    }
+  }, [isOpen]);
+
+  const handleSend = async () => {
     const trimmed = inputValue.trim();
     if (!trimmed) return;
+
+    // Get selected text from session storage if available
+    const selectedText = sessionStorage.getItem('selectedText');
+    sessionStorage.removeItem('selectedText'); // Clear after use
 
     const newMessage: Message = {
       id: Date.now().toString(),
@@ -106,20 +122,46 @@ export default function Chatbot({ onSend }: ChatbotProps) {
 
     setMessages((prev) => [...prev, newMessage]);
     setInputValue('');
-    onSend?.(trimmed);
 
-    // Simulate bot typing
+    // Show typing indicator
     setIsTyping(true);
-    setTimeout(() => {
-      setIsTyping(false);
+
+    try {
+      // Create chat request object
+      const chatRequest: ChatRequest = {
+        message: trimmed,
+        session_id: sessionId || undefined, // Use existing session ID or let backend create one
+        selected_text: selectedText || undefined, // Use selected text if available
+      };
+
+      // Send the message using the API service
+      const response = await chatApiService.sendMessage(chatRequest);
+
+      // Update session ID if it was returned (first message creates session)
+      if (response.session_id && !sessionId) {
+        setSessionId(response.session_id);
+      }
+
+      const botMessage: Message = {
+        id: response.message_id || (Date.now() + 1).toString(),
+        text: response.response,
+        sender: 'bot',
+        timestamp: new Date(response.timestamp),
+      };
+
+      setMessages((prev) => [...prev, botMessage]);
+    } catch (error) {
+      console.error('Chat API error:', error);
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: "I'm here to help you learn about Physical AI and Humanoid Robotics! This is a UI demo – backend integration coming soon.",
+        text: "Sorry, I'm having trouble connecting to the AI service. Please try again later.",
         sender: 'bot',
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, botMessage]);
-    }, 1500);
+    } finally {
+      setIsTyping(false);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {

@@ -51,8 +51,8 @@ get_current_branch() {
         if [[ -n "$latest_feature" ]]; then
             echo "$latest_feature"
             return
-        }
-    }
+        fi
+    fi
 
     echo "main"  # Final fallback
 }

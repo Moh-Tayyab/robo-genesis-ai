@@ -2,6 +2,7 @@
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "shadcn",
-    "context7"
+    "context7",
+    "github"
   ]
 }

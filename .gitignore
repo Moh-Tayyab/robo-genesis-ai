@@ -44,3 +44,5 @@ log/
 build/
 devel/
 node_modules
+.vercel
+.env*.local

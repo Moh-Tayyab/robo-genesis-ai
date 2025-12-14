@@ -148,20 +148,41 @@ export function NavbarAuthButton(): React.ReactElement {
 
   if (user) {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <span style={{ fontSize: '0.875rem', color: 'var(--ifm-navbar-link-color)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <span style={{
+          fontSize: '0.875rem',
+          color: 'var(--ifm-navbar-link-color)',
+          fontFamily: 'var(--chatkit-font-family, inherit)',
+          fontWeight: 500
+        }}>
           {user.name || user.email}
         </span>
         <button
           onClick={handleLogout}
           style={{
-            background: 'none',
-            border: '1px solid var(--ifm-color-primary)',
-            borderRadius: '4px',
-            padding: '0.25rem 0.75rem',
+            background: 'rgba(255, 255, 255, 0.1)',
+            border: '1px solid var(--ifm-color-emphasis-300)',
+            borderRadius: '8px',
+            padding: '0.375rem 0.75rem',
             cursor: 'pointer',
-            color: 'var(--ifm-color-primary)',
+            color: 'var(--ifm-color-emphasis-900)',
             fontSize: '0.875rem',
+            fontWeight: 500,
+            fontFamily: 'var(--chatkit-font-family, inherit)',
+            backdropFilter: 'blur(4px)',
+            transition: 'all 0.2s ease',
+          }}
+          onMouseEnter={(e) => {
+            const target = e.target as HTMLButtonElement;
+            target.style.background = 'rgba(255, 255, 255, 0.2)';
+            target.style.borderColor = '#00F2FF';
+            target.style.color = '#00F2FF';
+          }}
+          onMouseLeave={(e) => {
+            const target = e.target as HTMLButtonElement;
+            target.style.background = 'rgba(255, 255, 255, 0.1)';
+            target.style.borderColor = 'var(--ifm-color-emphasis-300)';
+            target.style.color = 'var(--ifm-color-emphasis-900)';
           }}
         >
           Logout
@@ -174,14 +195,28 @@ export function NavbarAuthButton(): React.ReactElement {
     <button
       onClick={handleLogin}
       style={{
-        background: 'var(--ifm-color-primary)',
+        background: 'linear-gradient(135deg, #00F2FF, #FF00C1)',
         border: 'none',
-        borderRadius: '4px',
+        borderRadius: '8px',
         padding: '0.5rem 1rem',
         cursor: 'pointer',
-        color: 'white',
+        color: '#0B0C10',
         fontSize: '0.875rem',
-        fontWeight: 500,
+        fontWeight: 600,
+        fontFamily: 'var(--chatkit-font-family, inherit)',
+        boxShadow: '0 2px 8px rgba(0, 242, 255, 0.2)',
+        transition: 'all 0.2s ease',
+        backdropFilter: 'blur(4px)',
+      }}
+      onMouseEnter={(e) => {
+        const target = e.target as HTMLButtonElement;
+        target.style.transform = 'translateY(-1px)';
+        target.style.boxShadow = '0 4px 12px rgba(0, 242, 255, 0.3)';
+      }}
+      onMouseLeave={(e) => {
+        const target = e.target as HTMLButtonElement;
+        target.style.transform = 'translateY(0)';
+        target.style.boxShadow = '0 2px 8px rgba(0, 242, 255, 0.2)';
       }}
     >
       Login

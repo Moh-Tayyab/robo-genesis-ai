@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /**
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
@@ -6,27 +10,50 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-color-primary: #00F2FF; /* neon-cyan */
+  --ifm-color-primary-dark: #00D2D9; /* darker neon-cyan */
+  --ifm-color-primary-darker: #00B2B5; /* even darker neon-cyan */
+  --ifm-color-primary-darkest: #009292; /* darkest neon-cyan */
+  --ifm-color-primary-light: #33F4FF; /* lighter neon-cyan */
+  --ifm-color-primary-lighter: #66F7FF; /* even lighter neon-cyan */
+  --ifm-color-primary-lightest: #99FAFF; /* lightest neon-cyan */
+  --ifm-color-secondary: #FF00C1; /* neon-magenta as secondary */
+  --ifm-color-secondary-dark: #D900A3; /* darker neon-magenta */
+  --ifm-color-secondary-darker: #B5008A; /* even darker neon-magenta */
+  --ifm-color-secondary-darkest: #920072; /* darkest neon-magenta */
+  --ifm-color-secondary-light: #FF33CD; /* lighter neon-magenta */
+  --ifm-color-secondary-lighter: #FF66D9; /* even lighter neon-magenta */
+  --ifm-color-secondary-lightest: #FF99E5; /* lightest neon-magenta */
+  --docusaurus-highlighted-code-line-bg: rgba(0, 242, 255, 0.2); /* neon-cyan highlight in dark mode */
+  --ifm-background-color: #0B0C10; /* raisin-black */
+  --ifm-background-surface-color: #0B0C10; /* raisin-black */
+  --ifm-font-color-base: #ffffff; /* white text */
+  --ifm-font-color-base-inverse: #0B0C10; /* raisin-black inverse */
+  --ifm-border-color: rgba(0, 242, 255, 0.08); /* grid-line */
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #00F2FF; /* neon-cyan */
+  --ifm-color-primary-dark: #00D2D9; /* darker neon-cyan */
+  --ifm-color-primary-darker: #00B2B5; /* even darker neon-cyan */
+  --ifm-color-primary-darkest: #009292; /* darkest neon-cyan */
+  --ifm-color-primary-light: #33F4FF; /* lighter neon-cyan */
+  --ifm-color-primary-lighter: #66F7FF; /* even lighter neon-cyan */
+  --ifm-color-primary-lightest: #99FAFF; /* lightest neon-cyan */
+  --ifm-color-secondary: #FF00C1; /* neon-magenta as secondary */
+  --ifm-color-secondary-dark: #D900A3; /* darker neon-magenta */
+  --ifm-color-secondary-darker: #B5008A; /* even darker neon-magenta */
+  --ifm-color-secondary-darkest: #920072; /* darkest neon-magenta */
+  --ifm-color-secondary-light: #FF33CD; /* lighter neon-magenta */
+  --ifm-color-secondary-lighter: #FF66D9; /* even lighter neon-magenta */
+  --ifm-color-secondary-lightest: #FF99E5; /* lightest neon-magenta */
+  --docusaurus-highlighted-code-line-bg: rgba(0, 242, 255, 0.2); /* neon-cyan highlight in dark mode */
+  --ifm-background-color: #0B0C10; /* raisin-black */
+  --ifm-background-surface-color: #0B0C10; /* raisin-black */
+  --ifm-font-color-base: #ffffff; /* white text */
+  --ifm-font-color-base-inverse: #0B0C10; /* raisin-black inverse */
+  --ifm-border-color: rgba(0, 242, 255, 0.08); /* grid-line */
 }
 
 /* Custom styles for robotics content */
@@ -35,25 +62,537 @@
 }
 
 .try-with-ai {
-  background-color: var(--ifm-color-primary-lightest);
+  background: linear-gradient(135deg, rgba(0, 242, 255, 0.15), rgba(255, 0, 193, 0.1));
   border-left: 4px solid var(--ifm-color-primary);
   padding: 1rem;
   margin: 1.5rem 0;
-  border-radius: 4px;
+  border-radius: 8px;
+  border-top: 1px solid var(--grid-line);
+  border-right: 1px solid var(--grid-line);
+  border-bottom: 1px solid var(--grid-line);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 [data-theme='dark'] .try-with-ai {
-  background-color: rgba(37, 194, 160, 0.1);
+  background: linear-gradient(135deg, rgba(0, 242, 255, 0.1), rgba(255, 0, 193, 0.05));
 }
 
 .reflection-question {
-  background-color: #fff9db;
-  border-left: 4px solid #ffd700;
+  background: linear-gradient(135deg, rgba(255, 0, 193, 0.15), rgba(0, 242, 255, 0.1));
+  border-left: 4px solid var(--ifm-color-secondary);
   padding: 1rem;
   margin: 1.5rem 0;
-  border-radius: 4px;
+  border-radius: 8px;
+  border-top: 1px solid var(--grid-line);
+  border-right: 1px solid var(--grid-line);
+  border-bottom: 1px solid var(--grid-line);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 [data-theme='dark'] .reflection-question {
-  background-color: rgba(255, 215, 0, 0.1);
+  background: linear-gradient(135deg, rgba(255, 0, 193, 0.1), rgba(0, 242, 255, 0.05));
+}
+
+/* Professional-themed custom styles with conic gradients */
+@layer base {
+  :root {
+    --raisin-black: #0B0C10;
+    --neon-cyan: #00F2FF;
+    --neon-magenta: #FF00C1;
+    --grid-line: rgba(0, 242, 255, .08);
+    --code-bg: #011627;
+
+    /* Context7-themed custom styles */
+    --context7-primary: var(--neon-cyan);
+    --context7-accent: var(--neon-magenta);
+    --context7-dark: var(--raisin-black);
+    --context7-gray: #1A1A1A;
+
+    /* Professional color variables */
+    --primary-gradient: conic-gradient(from 180deg at 50% 50%, var(--neon-cyan) 0deg, var(--neon-magenta) 180deg, var(--neon-cyan) 360deg);
+    --secondary-gradient: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+    --background: var(--raisin-black);
+    --text-primary: #ffffff;
+    --text-secondary: #e2e8f0;
+    --border: var(--grid-line);
+  }
+
+  .dark {
+    --raisin-black: #0B0C10;
+    --neon-cyan: #00F2FF;
+    --neon-magenta: #FF00C1;
+    --grid-line: rgba(0, 242, 255, .08);
+    --code-bg: #011627;
+
+    /* Context7-themed custom styles */
+    --context7-primary: var(--neon-cyan);
+    --context7-accent: var(--neon-magenta);
+    --context7-dark: var(--raisin-black);
+    --context7-gray: #1A1A1A;
+
+    /* Professional color variables */
+    --primary-gradient: conic-gradient(from 180deg at 50% 50%, var(--neon-cyan) 0deg, var(--neon-magenta) 180deg, var(--neon-cyan) 360deg);
+    --secondary-gradient: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+    --background: var(--raisin-black);
+    --text-primary: #ffffff;
+    --text-secondary: #e2e8f0;
+    --border: var(--grid-line);
+  }
+}
+
+/* Professional gradient backgrounds */
+.gradient-bg {
+  background: var(--primary-gradient);
+}
+
+.gradient-bg-secondary {
+  background: var(--secondary-gradient);
+}
+
+/* Glassmorphism utility with neon colors */
+.glass {
+  background: rgba(11, 12, 16, 0.3); /* raisin-black with 30% opacity */
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--grid-line);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.dark .glass {
+  background: rgba(11, 12, 16, 0.4); /* raisin-black with 40% opacity */
+  border: 1px solid rgba(0, 242, 255, 0.5); /* grid-line with 50% opacity */
+}
+
+/* Neon-themed elements */
+.neon-border {
+  border: 1px solid rgba(0, 242, 255, 0.3); /* neon-cyan with 30% opacity */
+  border-radius: 8px;
+}
+
+.neon-text {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 8px var(--neon-cyan);
+}
+
+.neon-text-magenta {
+  color: var(--neon-magenta);
+  text-shadow: 0 0 8px var(--neon-magenta);
+}
+
+/* Professional card styling */
+.card-professional {
+  background: var(--raisin-black);
+  border: 1px solid var(--grid-line);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  background-image: radial-gradient(var(--grid-line) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.card-professional:hover {
+  border: 1px solid rgba(0, 242, 255, 0.5); /* neon-cyan with 50% opacity */
+  box-shadow: 0 20px 25px -5px rgba(0, 242, 255, 0.1), 0 10px 10px -5px rgba(0, 242, 255, 0.04);
+  transition: all 0.3s ease;
+}
+
+/* Conic gradient button */
+.btn-conic {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  color: white;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  background: var(--primary-gradient);
+}
+
+.btn-conic:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -10px var(--neon-magenta);
+}
+
+.btn-conic:active {
+  transform: translateY(0);
+}
+
+/* Grid background pattern */
+.grid-bg {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Premium hover effects */
+.premium-hover {
+  transition: all 300ms ease-in-out;
+}
+
+.premium-hover:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Parallax scroll effect */
+.parallax-element {
+  transform: translateZ(0);
+  transition: transform 1000ms ease-out;
+}
+
+/* Additional professional gradient patterns using the color palette */
+.gradient-radial-top {
+  background: radial-gradient(125% 125% at 50% 10%, var(--raisin-black) 40%, var(--neon-cyan) 100%);
+}
+
+.gradient-radial-bottom {
+  background: radial-gradient(125% 125% at 50% 90%, var(--raisin-black) 40%, var(--neon-magenta) 100%);
+}
+
+.gradient-text-neon {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Glassmorphism with neon border */
+.glass-neon {
+  background: rgba(11, 12, 16, 0.25); /* raisin-black with 25% opacity */
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--grid-line);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-neon::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: var(--primary-gradient);
+  z-index: -1;
+  border-radius: 14px;
+  filter: blur(4px);
+  opacity: 0.5;
+}
+
+/* Animated gradient background */
+.animated-gradient {
+  background-size: 400% 400%;
+  animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Grid pattern background */
+.grid-pattern {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Diagonal line pattern */
+.diagonal-lines {
+  background-image:
+    linear-gradient(
+      135deg,
+      var(--grid-line) 25%,
+      transparent 25%
+    ),
+    linear-gradient(
+      225deg,
+      var(--grid-line) 25%,
+      transparent 25%
+    ),
+    linear-gradient(
+      315deg,
+      var(--grid-line) 25%,
+      transparent 25%
+    ),
+    linear-gradient(
+      45deg,
+      var(--grid-line) 25%,
+      transparent 25%
+    );
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 0, 10px -10px, 0px 10px;
+}
+
+/* Professional heading styles - matching login button gradient */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.hero__title,
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  background: linear-gradient(135deg, #00F2FF, #FF00C1) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+  font-weight: 700 !important;
+  position: relative !important;
+  text-shadow: 0 2px 8px rgba(0, 242, 255, 0.2) !important;
+}
+
+h1,
+.markdown h1 {
+  font-size: 2.5rem !important;
+  margin-bottom: 1.5rem !important;
+  line-height: 1.2 !important;
+}
+
+h2,
+.markdown h2 {
+  font-size: 2rem !important;
+  margin-bottom: 1.25rem !important;
+  line-height: 1.3 !important;
+  padding-bottom: 0.5rem !important;
+  border-bottom: 2px solid var(--grid-line) !important;
+}
+
+h3,
+.markdown h3 {
+  font-size: 1.75rem !important;
+  margin-bottom: 1rem !important;
+  line-height: 1.4 !important;
+}
+
+h4,
+.markdown h4 {
+  font-size: 1.5rem !important;
+  margin-bottom: 0.75rem !important;
+  line-height: 1.5 !important;
+}
+
+h5,
+.markdown h5 {
+  font-size: 1.25rem !important;
+  margin-bottom: 0.5rem !important;
+  line-height: 1.6 !important;
+}
+
+h6,
+.markdown h6 {
+  font-size: 1.1rem !important;
+  margin-bottom: 0.5rem !important;
+  line-height: 1.6 !important;
+}
+
+/* Add premium glow effect to headings */
+h1::after,
+h2::after,
+h3::after {
+  content: '' !important;
+  position: absolute !important;
+  left: 0 !important;
+  bottom: -5px !important;
+  width: 30% !important;
+  height: 2px !important;
+  background: var(--primary-gradient) !important;
+  opacity: 0.7 !important;
+  filter: blur(1px) !important;
+  box-shadow: 0 0 8px var(--neon-cyan) !important;
+}
+
+h2::after {
+  bottom: -8px !important;
+}
+
+/* Professional title styles - matching login button gradient */
+.title {
+  background: linear-gradient(135deg, #00F2FF, #FF00C1) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+  font-weight: 800 !important;
+  font-size: 3rem !important;
+  text-align: center !important;
+  margin-bottom: 2rem !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.02em !important;
+  text-shadow: 0 2px 8px rgba(0, 242, 255, 0.2) !important;
+  position: relative !important;
+}
+
+/* Navbar styling */
+.navbar {
+  background: rgba(11, 12, 16, 0.8) !important;
+  backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid var(--grid-line) !important;
+}
+
+.navbar__inner {
+  padding: 0.5rem 1rem !important;
+  max-width: 100% !important;
+}
+
+.navbar__brand {
+  color: var(--neon-cyan) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 0 8px rgba(0, 242, 255, 0.3) !important;
+}
+
+.navbar__brand:hover {
+  color: var(--neon-cyan) !important;
+  text-shadow: 0 0 12px var(--neon-cyan) !important;
+}
+
+.navbar__item {
+  color: var(--ifm-navbar-link-color) !important;
+  font-weight: 500 !important;
+}
+
+.navbar__item:hover {
+  color: var(--neon-cyan) !important;
+}
+
+.navbar__link {
+  color: var(--ifm-navbar-link-color) !important;
+  font-weight: 500 !important;
+  border-radius: 8px !important;
+  padding: 0.5rem 0.75rem !important;
+  transition: all 0.2s ease !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+.navbar__link:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: var(--neon-cyan) !important;
+  border-color: var(--neon-cyan) !important;
+}
+
+.navbar__toggle {
+  color: var(--ifm-navbar-link-color) !important;
+}
+
+.navbar__toggle:hover {
+  color: var(--neon-cyan) !important;
+}
+
+/* Mobile sidebar */
+.navbar-sidebar {
+  background: var(--raisin-black) !important;
+}
+
+.navbar-sidebar__brand {
+  background: rgba(11, 12, 16, 0.9) !important;
+  backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid var(--grid-line) !important;
+}
+
+.navbar-sidebar__back {
+  color: var(--neon-cyan) !important;
+  font-weight: 500 !important;
+}
+
+/* Footer styling */
+.footer {
+  background: rgba(11, 12, 16, 0.9) !important;
+  backdrop-filter: blur(20px) !important;
+  border-top: 1px solid var(--grid-line) !important;
+  padding: 3rem 1rem 1.5rem !important;
+}
+
+.footer--dark {
+  --ifm-footer-background-color: transparent !important;
+  background: rgba(11, 12, 16, 0.9) !important;
+  backdrop-filter: blur(20px) !important;
+}
+
+.footer__title {
+  color: var(--neon-cyan) !important;
+  font-weight: 600 !important;
+  margin-bottom: 1rem !important;
+  font-size: 1.1rem !important;
+  text-shadow: 0 0 8px rgba(0, 242, 255, 0.3) !important;
+  font-family: var(--ifm-font-family-base) !important;
+}
+
+.footer__link-item {
+  color: var(--ifm-footer-link-color) !important;
+  line-height: 2 !important;
+  transition: all 0.2s ease !important;
+  position: relative !important;
+  padding-left: 0.75rem !important;
+  margin-bottom: 0.25rem !important;
+}
+
+.footer__link-item:hover {
+  color: var(--neon-cyan) !important;
+  transform: translateX(4px) !important;
+}
+
+.footer__link-item::before {
+  content: '▶' !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  color: var(--neon-cyan) !important;
+  opacity: 0.6 !important;
+  font-size: 0.7rem !important;
+  transition: all 0.2s ease !important;
+}
+
+.footer__link-item:hover::before {
+  opacity: 1 !important;
+  transform: translateX(2px) !important;
+}
+
+.footer__items {
+  margin-bottom: 1.5rem !important;
+}
+
+.footer__items:last-child {
+  margin-bottom: 0 !important;
+}
+
+.footer__copyright {
+  color: var(--ifm-font-color-base) !important;
+  opacity: 0.7 !important;
+  font-size: 0.875rem !important;
+  text-align: center !important;
+  padding-top: 1.5rem !important;
+  border-top: 1px solid var(--grid-line) !important;
+  margin-top: 1.5rem !important;
+}
+
+.footer__logo {
+  margin-top: 1rem !important;
+  max-width: var(--ifm-footer-logo-max-width) !important;
+}
+
+.footer__logo img {
+  filter: brightness(0) saturate(100%) invert(99%) sepia(1%) saturate(7471%) hue-rotate(298deg) brightness(107%) contrast(101%) !important;
+}
+
+/* Responsive footer */
+@media (max-width: 768px) {
+  .footer {
+    padding: 2rem 1rem 1rem !important;
+  }
+
+  .footer__items {
+    margin-bottom: 2rem !important;
+  }
 }

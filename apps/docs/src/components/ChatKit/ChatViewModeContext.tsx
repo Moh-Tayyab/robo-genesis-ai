@@ -19,12 +19,8 @@ import React, { createContext, useContext, useState, useEffect, useCallback, use
 /**
  * Available chat view modes
  */
-export type ChatViewMode = 'compact' | 'fullpage' | 'sidedock-left' | 'sidedock-right';
+export type ChatViewMode = 'compact' | 'fullpage';
 
-/**
- * Side dock position for convenience
- */
-export type SideDockPosition = 'left' | 'right';
 
 /**
  * Context value shape
@@ -46,10 +42,6 @@ export interface ChatViewModeContextValue {
   minimize: () => void;
   /** Expand to fullpage mode */
   expandFullpage: () => void;
-  /** Dock to a side */
-  dockToSide: (position: SideDockPosition) => void;
-  /** Check if current mode is a sidedock mode */
-  isSideDocked: boolean;
   /** Check if current mode is fullpage */
   isFullpage: boolean;
   /** Check if current mode is compact */
@@ -123,15 +115,12 @@ export function ChatViewModeProvider({
     }
   }, [mode, disablePersistence]);
 
-  // Handle mobile viewport - force fullpage when sidedock on small screens
+  // Handle mobile viewport - no sidedock modes to consider now
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
     const handleResize = () => {
-      const isMobile = window.innerWidth < 768;
-      if (isMobile && (mode === 'sidedock-left' || mode === 'sidedock-right')) {
-        setModeState('fullpage');
-      }
+      // No sidedock modes to handle anymore
     };
 
     // Check on mount
@@ -141,7 +130,7 @@ export function ChatViewModeProvider({
     return () => window.removeEventListener('resize', handleResize);
   }, [mode]);
 
-  // Add body class for sidedock modes to push content
+  // No body class needed since we don't have sidedock modes anymore
   useEffect(() => {
     if (typeof document === 'undefined') return;
 
@@ -151,14 +140,7 @@ export function ChatViewModeProvider({
       'chatkit-sidedock-right-active'
     );
 
-    // Add class for active sidedock mode when open
-    if (isOpen) {
-      if (mode === 'sidedock-left') {
-        document.body.classList.add('chatkit-sidedock-left-active');
-      } else if (mode === 'sidedock-right') {
-        document.body.classList.add('chatkit-sidedock-right-active');
-      }
-    }
+    // No sidedock classes to add anymore
 
     return () => {
       document.body.classList.remove(
@@ -166,7 +148,7 @@ export function ChatViewModeProvider({
         'chatkit-sidedock-right-active'
       );
     };
-  }, [mode, isOpen]);
+  }, []);
 
   // -------------------------------------------------------------------------
   // Actions
@@ -195,21 +177,22 @@ export function ChatViewModeProvider({
   }, []);
 
   const expandFullpage = useCallback(() => {
-    setModeState('fullpage');
-    setIsOpen(true);
-  }, []);
+    if (mode === 'fullpage') {
+      // If already in fullpage mode, minimize to compact
+      setModeState('compact');
+      setIsOpen(false);
+    } else {
+      // Otherwise, expand to fullpage
+      setModeState('fullpage');
+      setIsOpen(true);
+    }
+  }, [mode]);
 
-  const dockToSide = useCallback((position: SideDockPosition) => {
-    const newMode: ChatViewMode = position === 'left' ? 'sidedock-left' : 'sidedock-right';
-    setModeState(newMode);
-    setIsOpen(true);
-  }, []);
 
   // -------------------------------------------------------------------------
   // Computed values
   // -------------------------------------------------------------------------
 
-  const isSideDocked = mode === 'sidedock-left' || mode === 'sidedock-right';
   const isFullpage = mode === 'fullpage';
   const isCompact = mode === 'compact';
 
@@ -227,12 +210,10 @@ export function ChatViewModeProvider({
       openInMode,
       minimize,
       expandFullpage,
-      dockToSide,
-      isSideDocked,
       isFullpage,
       isCompact,
     }),
-    [mode, isOpen, isMounted, setMode, toggleOpen, openInMode, minimize, expandFullpage, dockToSide, isSideDocked, isFullpage, isCompact]
+    [mode, isOpen, isMounted, setMode, toggleOpen, openInMode, minimize, expandFullpage, isFullpage, isCompact]
   );
 
   return (
@@ -269,7 +250,7 @@ export function useChatViewMode(): ChatViewModeContextValue {
  * Type guard to validate a mode string
  */
 function isValidMode(value: string): value is ChatViewMode {
-  return ['compact', 'fullpage', 'sidedock-left', 'sidedock-right'].includes(value);
+  return ['compact', 'fullpage'].includes(value);
 }
 
 /**

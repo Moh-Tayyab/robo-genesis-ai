@@ -357,7 +357,7 @@ export default function FloatingChatBar(): React.ReactElement {
       if (message) {
         setState(prev => ({ ...prev, inputValue: message }));
         if (!isOpen) {
-          toggleOpen();
+          expandFullpage();
         }
         // Trigger send after state update
         setTimeout(() => {
@@ -371,7 +371,7 @@ export default function FloatingChatBar(): React.ReactElement {
 
     window.addEventListener('chatkit:sendMessage', handleSendEvent as EventListener);
     return () => window.removeEventListener('chatkit:sendMessage', handleSendEvent as EventListener);
-  }, [isOpen, toggleOpen]);
+  }, [isOpen, expandFullpage]);
 
   /**
    * Send message and handle SSE streaming response

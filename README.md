@@ -33,33 +33,40 @@ This book also integrates **AI Agents**, **BetterAuth signup/signin**, **Persona
 ## 📂 Repository Structure
 
 ```
-project-root/
+robo-genesis-ai/
 │
-├── book-source/
-│   └── docs/
-│       ├── 01-Physical-AI-Foundations/
-│       ├── 02-ROS2-Fundamentals/
-│       ├── 03-Simulation-Systems/
-│       ├── 04-NVIDIA-Isaac-AI/
-│       ├── 05-Vision-Language-Action/
-│       └── 06-Capstone/
+├── apps/                          # Application packages
+│   ├── frontend/                  # Frontend applications
+│   │   ├── docs-app/              # Documentation site
+│   │   ├── auth-app/              # Authentication application
+│   │   └── dashboard/             # Admin dashboard
+│   └── backend/                   # Backend services
+│       ├── api/                   # Main API service
+│       ├── chatkit/               # Chatkit backend service
+│       └── auth/                  # Authentication service
 │
-├── rag-backend/
-│   ├── app/ (FastAPI)
-│   ├── embeddings/
-│   ├── vector-store/ (Qdrant)
-│   └── db/ (Neon connection)
+├── packages/                      # Shared packages and libraries
+│   ├── ui-lib/                    # UI component library
+│   ├── auth-config-lib/           # Authentication configuration
+│   ├── auth-db/                   # Authentication database layer
+│   ├── types/                     # Shared TypeScript types
+│   ├── utils/                     # Shared utilities
+│   └── constants/                 # Shared constants
 │
-├── auth/
-│   └── betterauth/ (Signup/Signin)
+├── services/                      # Standalone services
+│   ├── database/                  # Database configurations
+│   ├── ai-agents/                 # AI agent implementations
+│   └── robotics-sim/              # Robotics simulation services
 │
-├── monorepo/
-│   ├── agents/ (Claude Code agents)
-│   ├── skills/ (Claude reusable intelligence)
-│   └── workflows/
-│
-├── .claude/ (Claude Code configs)
-└── project-index.md
+├── specs/                         # Feature specifications
+├── docs/                          # Documentation
+├── tests/                         # Test files
+├── scripts/                       # Build and deployment scripts
+├── config/                        # Configuration files
+├── assets/                        # Static assets
+├── .github/                       # GitHub configurations
+├── history/                       # Development history
+└── tools/                         # Development tools
 ```
 
 ---

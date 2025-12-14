@@ -132,7 +132,7 @@ function threadItemsToMessages(thread: Thread): Message[] {
  * FloatingChatBar Component
  *
  * Bottom-center floating chat interface with:
- * - Multiple view modes: compact, fullpage, sidedock-left, sidedock-right
+ * - Multiple view modes: compact, fullpage
  * - Expandable panel for message history
  * - SSE streaming for real-time responses
  * - Keyboard shortcuts (Ctrl+I / Cmd+I to focus, Escape to minimize)
@@ -164,9 +164,7 @@ export default function FloatingChatBar(): React.ReactElement {
     toggleOpen,
     minimize,
     expandFullpage,
-    dockToSide,
     isFullpage,
-    isSideDocked,
   } = useChatViewMode();
 
   // Thread persistence (only used when authenticated)
@@ -656,7 +654,6 @@ export default function FloatingChatBar(): React.ReactElement {
   const characterCount = state.inputValue.length;
   const isNearLimit = characterCount > MAX_INPUT_LENGTH * 0.9;
   const viewModeClass = getViewModeClassName(mode);
-  const showDockButtons = canShowDockButtons();
 
   // Don't render until mounted (prevents hydration mismatch)
   if (!isMounted) {
@@ -678,12 +675,12 @@ export default function FloatingChatBar(): React.ReactElement {
             <div className="chatkit-panel__actions">
               {/* Mode toggle buttons (T062) */}
               <div className="chatkit-panel__mode-buttons">
-                {/* Fullpage mode button - maximize icon with corner arrows */}
+                {/* Fullpage mode toggle button - maximize icon with corner arrows */}
                 <button
                   className={`chatkit-panel__mode-btn ${isFullpage ? 'chatkit-panel__mode-btn--active' : ''}`}
                   onClick={expandFullpage}
-                  aria-label="Fullpage mode"
-                  title="Fullpage"
+                  aria-label={isFullpage ? "Compact mode" : "Fullpage mode"}
+                  title={isFullpage ? "Compact" : "Fullpage"}
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     {/* Top-left corner */}
@@ -697,35 +694,6 @@ export default function FloatingChatBar(): React.ReactElement {
                   </svg>
                 </button>
 
-                {/* Dock left button (T066 - hidden on mobile) */}
-                {showDockButtons && (
-                  <button
-                    className={`chatkit-panel__mode-btn chatkit-panel__mode-btn--dock ${mode === 'sidedock-left' ? 'chatkit-panel__mode-btn--active' : ''}`}
-                    onClick={() => dockToSide('left')}
-                    aria-label="Dock to left"
-                    title="Dock left"
-                  >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="3" y="3" width="18" height="18" rx="2" />
-                      <line x1="9" y1="3" x2="9" y2="21" />
-                    </svg>
-                  </button>
-                )}
-
-                {/* Dock right button (T066 - hidden on mobile) */}
-                {showDockButtons && (
-                  <button
-                    className={`chatkit-panel__mode-btn chatkit-panel__mode-btn--dock ${mode === 'sidedock-right' ? 'chatkit-panel__mode-btn--active' : ''}`}
-                    onClick={() => dockToSide('right')}
-                    aria-label="Dock to right"
-                    title="Dock right"
-                  >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="3" y="3" width="18" height="18" rx="2" />
-                      <line x1="15" y1="3" x2="15" y2="21" />
-                    </svg>
-                  </button>
-                )}
               </div>
 
               {/* History button (only for authenticated users) */}
@@ -806,8 +774,8 @@ export default function FloatingChatBar(): React.ReactElement {
             onSignInClick={handleSignInClick}
           />
 
-          {/* Input area in panel for fullpage/sidedock modes */}
-          {(isFullpage || isSideDocked) && (
+          {/* Input area in panel for fullpage mode */}
+          {isFullpage && (
             <div className="chatkit-panel__input-area">
               <div className="chatkit-bar__container">
                 <input
@@ -846,54 +814,19 @@ export default function FloatingChatBar(): React.ReactElement {
         </div>
       )}
 
-      {/* Floating Chat Bar (only in compact mode) */}
-      {mode === 'compact' && (
-        <div className="chatkit-bar">
-          <div className="chatkit-bar__container">
-            <input
-              ref={!isOpen ? inputRef : undefined}
-              type="text"
-              className="chatkit-input"
-              placeholder={limitReached && !isAuthenticated ? "Sign in to continue..." : "Ask a question... (Ctrl+I)"}
-              value={state.inputValue}
-              onChange={handleInputChange}
-              onKeyPress={handleKeyPress}
-              onFocus={() => {
-                if (!isOpen) toggleOpen();
-              }}
-              disabled={state.isLoading || (limitReached && !isAuthenticated)}
-              maxLength={MAX_INPUT_LENGTH}
-            />
-
-            <button
-              className="chatkit-send-btn"
-              onClick={handleSendMessage}
-              disabled={!state.inputValue.trim() || state.isLoading || (limitReached && !isAuthenticated)}
-              aria-label="Send message"
-            >
-              {state.isLoading ? (
-                <span className="chatkit-spinner" />
-              ) : (
-                '\u2191'
-              )}
-            </button>
-
-            {!isOpen && state.messages.length > 0 && (
-              <button
-                className="chatkit-expand-btn"
-                onClick={toggleOpen}
-                aria-label="Expand chat"
-              >
-                {state.messages.length}
-              </button>
-            )}
-          </div>
-
-          {characterCount > 0 && (
-            <div className={`chatkit-bar__counter ${isNearLimit ? 'chatkit-bar__counter--warning' : ''}`}>
-              {characterCount} / {MAX_INPUT_LENGTH}
-            </div>
-          )}
+      {/* Premium Floating Chat Icon on Right Side - Always appears when chat is closed */}
+      {!isOpen && (
+        <div className="chatkit-fab">
+          <button
+            className="chatkit-fab__button"
+            onClick={expandFullpage}
+            aria-label="Open chat in fullpage mode"
+            title="AI Robotics Tutor"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+          </button>
         </div>
       )}
 

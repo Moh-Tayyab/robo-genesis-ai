@@ -1,158 +1,214 @@
-# Physical AI & Humanoid Robotics Textbook
+# Physical AI & Humanoid Robotics — Project Overview
 
-> Comprehensive 13-week textbook for industry practitioners: ROS 2, Digital Twin (Gazebo/Unity), NVIDIA Isaac Sim, and Vision-Language-Action models.
+## 📘 Project Title
+**Physical AI & Humanoid Robotics: A Modern AI-Native Technical Textbook (RoboGenesis AI)**
 
-[![Deploy to GitHub Pages](https://github.com/Moh-Tayyab/Physical-AI-Humanoid-Robotics-Textbook/actions/workflows/deploy.yml/badge.svg)](https://github.com/Moh-Tayyab/Physical-AI-Humanoid-Robotics-Textbook/actions/workflows/deploy.yml)
-[![Build Validation](https://github.com/Moh-Tayyab/Physical-AI-Humanoid-Robotics-Textbook/actions/workflows/build-validation.yml/badge.svg)](https://github.com/Moh-Tayyab/Physical-AI-Humanoid-Robotics-Textbook/actions/workflows/build-validation.yml)
+This project is a complete AI-native textbook built using **Docusaurus**, **Spec‑Kit Plus**, and **Claude Code**, designed to teach the future of robotics: humanoids, embodied intelligence, simulation systems, ROS 2 control, NVIDIA Isaac AI, and Vision‑Language‑Action robotics.
 
-## Overview
-
-This textbook provides hands-on training for building autonomous humanoid robots using:
-- **ROS 2** (Weeks 3-5): Robot Operating System fundamentals
-- **Digital Twin** (Weeks 6-7): Gazebo and Unity simulation
-- **NVIDIA Isaac Sim** (Weeks 8-10): GPU-accelerated simulation and synthetic data
-- **Vision-Language-Action Models** (Weeks 11-13): Multimodal AI for humanoid control
-
-**Target Audience**: Industry practitioners with Python programming knowledge, transitioning to robotics and embodied AI.
-
-## Course Structure
-
-| Module | Weeks | Focus |
-|--------|-------|-------|
-| Introduction | 1-2 | Physical AI Foundations |
-| Module 1: ROS 2 | 3-5 | Architecture, Topics, URDF |
-| Module 2: Digital Twin | 6-7 | Gazebo, Unity, Sim2Real |
-| Module 3: NVIDIA Isaac | 8-10 | Isaac Sim, Synthetic Data, Imitation Learning |
-| Module 4: VLA & Humanoids | 11-13 | Multimodal Models, Transformer Policies |
-| Capstone | Week 13 | Autonomous Humanoid (Voice → Action) |
-
-## Hardware Paths
-
-Choose one of three hardware configurations:
-
-1. **Digital Twin Workstation**: RTX 3060+ GPU, Ubuntu 22.04
-2. **Physical AI Edge Kit**: NVIDIA Jetson Orin Nano
-3. **Cloud-Native**: AWS/Azure with GPU instances
-
-## Quick Start
-
-```bash
-# Clone the repository
-git clone https://github.com/Moh-Tayyab/Physical-AI-Humanoid-Robotics-Textbook.git
-cd Physical-AI-Humanoid-Robotics-Textbook
-
-# Install dependencies
-npm install
-
-# Start development server
-npm start
-
-# Open http://localhost:3000
-```
-
-For detailed setup instructions, see [`specs/001-book-master-plan/quickstart.md`](specs/001-book-master-plan/quickstart.md).
-
-## Documentation Site
-
-This project uses [Docusaurus 3](https://docusaurus.io/) with:
-- Dashboard-style homepage with module cards
-- Nested sidebar with collapsible categories
-- Hybrid search (Algolia + Flexsearch for glossary)
-- Custom metadata for chapter prerequisites and learning objectives
-- GitHub Actions CI/CD with quality gates
-
-## Project Structure
-
-```
-Physical-AI-Humanoid-Robotics-Textbook/
-├── docs/                   # Main content
-│   ├── intro.md
-│   ├── setup/              # 3 hardware paths
-│   ├── module-1-ros2/      # Weeks 3-5
-│   ├── module-2-digital-twin/   # Weeks 6-7
-│   ├── module-3-isaac/     # Weeks 8-10
-│   ├── module-4-vla-humanoids/  # Weeks 11-13
-│   ├── capstone/
-│   └── references/         # Glossary, notation, troubleshooting
-├── src/                    # Custom React components
-│   ├── components/
-│   └── pages/index.tsx     # Dashboard homepage
-├── specs/                  # Feature specifications
-│   └── 001-book-master-plan/
-│       ├── spec.md
-│       ├── plan.md
-│       ├── tasks.md
-│       └── contracts/      # JSON Schema for validation
-└── .github/workflows/      # CI/CD pipelines
-```
-
-## Contributing
-
-We welcome contributions! Please see the [Quickstart Guide](specs/001-book-master-plan/quickstart.md) for:
-- Development setup
-- Creating new chapters
-- Running quality checks
-- Metadata validation
-
-### Quality Gates
-
-All PRs must pass:
-- Build with 0 errors/warnings
-- Link validation (0 broken links)
-- Lighthouse scores: Performance ≥90, Accessibility ≥95, SEO ≥95
-- Chapter metadata validation against JSON Schema
-
-## Specification-Driven Development
-
-This project follows **Spec-Driven Development (SDD)** using [Spec-Kit Plus](https://github.com/Moh-Tayyab/spec-kit-plus):
-
-1. **Constitution**: Core principles in [`.specify/memory/constitution.md`](.specify/memory/constitution.md)
-2. **Specifications**: Feature specs in [`specs/001-book-master-plan/spec.md`](specs/001-book-master-plan/spec.md)
-3. **Planning**: Implementation plan in [`specs/001-book-master-plan/plan.md`](specs/001-book-master-plan/plan.md)
-4. **Tasks**: Breakdown in [`specs/001-book-master-plan/tasks.md`](specs/001-book-master-plan/tasks.md)
-5. **History**: Prompt History Records in [`history/prompts/`](history/prompts/)
-
-## Technology Stack
-
-- **Documentation**: Docusaurus 3.x
-- **Language**: TypeScript 5.x
-- **UI**: React 18.x
-- **Build Tools**: Node.js 18+
-- **Search**: Algolia DocSearch + Flexsearch
-- **CI/CD**: GitHub Actions
-- **Deployment**: GitHub Pages
-- **AI Assistant**: Claude Code
-
-## Roadmap
-
-- [ ] Week 1-2: Introduction chapters
-- [ ] Week 3-5: ROS 2 module chapters
-- [ ] Week 6-7: Digital Twin module chapters
-- [ ] Week 8-10: NVIDIA Isaac module chapters
-- [ ] Week 11-13: VLA & Humanoids module chapters
-- [ ] Capstone project guide
-- [ ] Assessment rubrics
-- [ ] Instructor materials
-- [ ] Video tutorials
-- [ ] Interactive code examples
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Built with [Docusaurus](https://docusaurus.io/) by Meta
-- Developed using [Claude Code](https://claude.ai/code) AI Assistant
-- Following [Spec-Kit Plus](https://github.com/Ameen-Alam/spec-kit-plus) methodology
-- Inspired by industry best practices in robotics education
-
-## Support
-
-- **Issues**: [GitHub Issues](https://github.com/Moh-Tayyab/Physical-AI-Humanoid-Robotics-Textbook/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/Moh-Tayyab/Physical-AI-Humanoid-Robotics-Textbook/discussions)
-- **Documentation**: [Quickstart Guide](specs/001-book-master-plan/quickstart.md)
+This book also integrates **AI Agents**, **BetterAuth signup/signin**, **Personalized Content**, **Urdu translation**, and a full **RAG chatbot** built on Neon + Qdrant + FastAPI.
 
 ---
 
-**Built with Claude Code • Powered by Spec-Driven Development**
+## 🎯 Project Goals
+1. Teach *Physical AI* — AI that operates in the real world.
+2. Provide a complete learning pathway across:
+   - ROS 2  
+   - Gazebo & Unity simulation  
+   - NVIDIA Isaac Sim & Isaac ROS  
+   - Vision-Language-Action Robotics  
+   - Humanoid robot control  
+3. Build a modern AI-native book using:
+   - **Docusaurus 3**
+   - **Spec‑Kit Plus**
+   - **Claude Code Agents & Skills**
+4. Ship an advanced **RAG search + chatbot** inside the book.
+5. Personalize learning through:
+   - **BetterAuth user onboarding**
+   - **Dynamic personalization**
+   - **Urdu translation toggle**
+6. Ship an autonomous **Humanoid Robotics Capstone**.
+
+---
+
+## 📂 Repository Structure
+
+```
+robo-genesis-ai/
+│
+├── apps/                          # Application packages
+│   ├── frontend/                  # Frontend applications
+│   │   ├── docs-app/              # Documentation site
+│   │   ├── auth-app/              # Authentication application
+│   │   └── dashboard/             # Admin dashboard
+│   └── backend/                   # Backend services
+│       ├── api/                   # Main API service
+│       ├── chatkit/               # Chatkit backend service
+│       └── auth/                  # Authentication service
+│
+├── packages/                      # Shared packages and libraries
+│   ├── ui-lib/                    # UI component library
+│   ├── auth-config-lib/           # Authentication configuration
+│   ├── auth-db/                   # Authentication database layer
+│   ├── types/                     # Shared TypeScript types
+│   ├── utils/                     # Shared utilities
+│   └── constants/                 # Shared constants
+│
+├── services/                      # Standalone services
+│   ├── database/                  # Database configurations
+│   ├── ai-agents/                 # AI agent implementations
+│   └── robotics-sim/              # Robotics simulation services
+│
+├── specs/                         # Feature specifications
+├── docs/                          # Documentation
+├── tests/                         # Test files
+├── scripts/                       # Build and deployment scripts
+├── config/                        # Configuration files
+├── assets/                        # Static assets
+├── .github/                       # GitHub configurations
+├── history/                       # Development history
+└── tools/                         # Development tools
+```
+
+---
+
+## 🚀 Technologies Used
+
+### **Frontend / Docs**
+- Docusaurus 3  
+- TypeScript  
+- TailwindCSS  
+- AI-personalized content  
+- Urdu translation system  
+
+### **Backend**
+- FastAPI  
+- BetterAuth  
+- Qdrant Cloud  
+- Neon Serverless Postgres  
+
+### **AI Agents + Tools**
+- Claude Code  
+- Spec-Kit Plus  
+- Agent Skills  
+- Agent Subagents  
+- MCP  
+
+### **Robotics**
+- ROS 2 Humble  
+- Gazebo Simulator  
+- Unity Robotics  
+- NVIDIA Isaac Sim  
+- Isaac ROS (VSLAM / Perception / Nav2)  
+
+---
+
+## 📚 Chapter Structure (18 Chapters)
+See **project-index.md** for full details.
+
+---
+
+## 🧠 How to Use This Repository with Claude Code
+
+1. Open the repository in **Claude Code**.  
+2. Claude will automatically load:
+   - `project-index.md`
+   - `.claude/claude.md` (after we create it)
+3. Ask Claude to:
+   - Generate chapters  
+   - Build lessons  
+   - Create RAG backend files  
+   - Create ROS2 packages  
+   - Generate simulations  
+   - Add personalization logic  
+
+Everything is **spec-driven**, not prompt-driven.
+
+---
+
+## 🔐 Authentication — BetterAuth
+
+This project uses **BetterAuth** for:
+
+- Signup  
+- Signin  
+- Asking user onboarding questions:
+  - Software background
+  - Robotics background
+  - Hardware availability
+- Storing user preferences for:
+  - Personalization
+  - Urdu translation
+  - Learning pace
+
+---
+
+## 🔍 RAG Chatbot
+
+The RAG chatbot uses:
+
+- **OpenAI Agents SDK / ChatKit**
+- **FastAPI backend**
+- **Qdrant Cloud Vector DB**
+- **Neon Serverless Postgres**
+
+Features:
+- Chapter-level retrieval  
+- “Answer only from selected text” mode  
+- Book-wide semantic search  
+- Chat history  
+- Personalization-aware answers  
+
+---
+
+## 💡 Capstone Project
+
+You will build a simulated autonomous humanoid robot that:
+
+- Takes natural language commands  
+- Uses Whisper for speech recognition  
+- Plans using an LLM  
+- Navigates using Nav2  
+- Perceives using Isaac ROS  
+- Manipulates objects in simulation  
+- Executes tasks autonomously  
+
+---
+
+## ⚙️ Running the Project
+
+### Install dependencies:
+```
+pnpm install
+```
+
+### Run Docusaurus locally:
+```
+pnpm start
+```
+
+### Run RAG backend:
+```
+uvicorn app.main:app --reload
+```
+
+### Run Qdrant locally (optional):
+```
+docker-compose up
+```
+
+---
+
+## 🧵 Feedback & Collaboration
+
+This project is designed to be continuously improved using:
+
+- Spec‑Kit Plus  
+- Claude Code iterative development  
+- Agent Skills & Reusable Intelligence  
+- Structured plans & specs  
+
+---
+
+## 🏁 License
+MIT
+

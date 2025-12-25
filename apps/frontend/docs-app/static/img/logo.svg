@@ -1,0 +1,39 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00F2FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF00C1;stop-opacity:1" />
+    </linearGradient>
+    <filter id="neonGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background circle with gradient -->
+  <circle cx="100" cy="100" r="95" fill="url(#neonGradient)" filter="url(#neonGlow)" />
+
+  <!-- Robot-inspired geometric shapes -->
+  <rect x="60" y="60" width="80" height="50" rx="8" fill="#0B0C10" opacity="0.8" />
+  <circle cx="80" cy="85" r="8" fill="#00F2FF" />
+  <circle cx="120" cy="85" r="8" fill="#00F2FF" />
+
+  <!-- Circuit-like lines -->
+  <path d="M70 120 H90" stroke="#FF00C1" stroke-width="3" stroke-linecap="round"/>
+  <path d="M110 120 H130" stroke="#FF00C1" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Text: "RG" for RoboGenesis -->
+  <text x="100" y="160" font-family="Arial, sans-serif" font-size="48" font-weight="bold"
+        fill="#0B0C10" text-anchor="middle" filter="url(#neonGlow)">
+    RG
+  </text>
+
+  <!-- Subtitle: "AI" -->
+  <text x="100" y="185" font-family="Arial, sans-serif" font-size="20" font-weight="bold"
+        fill="#0B0C10" text-anchor="middle">
+    AI
+  </text>
+</svg>

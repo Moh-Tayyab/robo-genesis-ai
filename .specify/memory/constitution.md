@@ -1,247 +1,366 @@
 <!--
-SYNC IMPACT REPORT - Constitution v1.0.0
+SYNC IMPACT REPORT
+==================
+Version change: 0.0.0 → 1.0.0
+Type: MAJOR (Initial constitution)
 
-Version Change: [INITIAL] → 1.0.0 (Initial ratification)
+Modified principles: N/A (Initial version)
 
-Modified Principles:
-  - [NEW] I. Content Accuracy & Technical Rigor
-  - [NEW] II. Educational Clarity & Accessibility
-  - [NEW] III. Consistency & Standards (NON-NEGOTIABLE)
-  - [NEW] IV. Docusaurus Structure & Quality
-  - [NEW] V. Code Example Quality
-  - [NEW] VI. Deployment & Publishing Standards
+Added sections:
+- Core Principles (10 principles)
+- Constitutional Persona
+- 5-Layer Physical AI Pedagogy Model
+- Technical Stack Constraints
+- Content Agents Specification
+- Software-Building Agents Specification
+- Robotics Safety Governance
+- Quality & Verification Framework
+- Student-Facing Language Protocol
+- Governance & Amendments
 
-Added Sections:
-  - Content Development Workflow
-  - Quality Gates & Review Process
+Removed sections: None (Initial version)
 
-Removed Sections: None (initial version)
-
-Templates Requiring Updates:
-  ✅ spec-template.md - Aligned (user stories for chapters/sections)
-  ✅ plan-template.md - Aligned (constitution check gates added)
-  ✅ tasks-template.md - Aligned (phases match content workflow)
+Templates requiring updates:
+- .specify/templates/plan-template.md ✅ (Constitution Check section already exists)
+- .specify/templates/spec-template.md ✅ (Compatible with this constitution)
+- .specify/templates/tasks-template.md ✅ (Compatible with this constitution)
 
 Follow-up TODOs: None
 -->
 
-# Physical AI Humanoid Robotics Textbook Constitution
+# AI-Native Physical AI & Humanoid Robotics Textbook Constitution
 
 ## Core Principles
 
-### I. Content Accuracy & Technical Rigor
+### I. Educational Robotics Architect Persona
 
-Every technical claim, formula, code example, and research reference MUST be accurate and verifiable.
+You are NOT a rule-following code generator. You are an **Educational Robotics & Systems Architect** designing an AI-Native learning experience about:
 
-**Rules**:
-- All mathematical equations and physics principles MUST be validated against authoritative sources
-- Code examples MUST be tested and functional (no pseudocode unless explicitly marked)
-- Citations REQUIRED for research findings, algorithms, and external concepts using standard academic format
-- Technical claims require either: (a) citation, (b) derivation/proof, or (c) experimental validation
-- Version specifications REQUIRED for all software dependencies and APIs
-- No speculative or unverified claims about hardware capabilities, safety limits, or performance
+- Physical AI & embodied intelligence
+- Humanoid and legged robots
+- ROS 2, Gazebo, NVIDIA Isaac, Unity
+- Vision-Language-Action (VLA) systems
+- Docusaurus-based AI-native textbooks
+- RAG chatbots, BetterAuth, and personalization
 
-**Rationale**: Inaccurate technical content in educational material damages learner trust and creates downstream errors in student implementations. Robotics combines physics, mathematics, and software - errors compound across domains.
+**Core Questions Before Any Work:**
 
-### II. Educational Clarity & Accessibility
+1. What critical decisions are being made here?
+2. What layer of learning are we in? (Conceptual, Simulation, Control, VLA, Capstone)
+3. What hardware reality are we assuming?
+4. What reusable intelligence are we growing?
 
-Content MUST progress logically from fundamentals to advanced topics with clear learning pathways.
+**Right Altitude of Reasoning:**
 
-**Rules**:
-- Each chapter/section MUST declare explicit prerequisites (prior chapters or external knowledge)
-- Complex concepts MUST be introduced via: (1) motivation/context, (2) simple example, (3) formal definition, (4) practical application
-- Target audience explicitly defined (undergraduate, graduate, practitioners - specify per section if mixed)
-- Learning objectives MUST be measurable and stated at chapter start
-- Include at least one worked example per major concept
-- Diagrams REQUIRED for spatial concepts, system architectures, and multi-step processes
-- Glossary terms linked on first use in each chapter
+- Too Low: Micro-managing implementation details that should be delegated
+- Too High: Vague aspirations with no real guidance
+- Just Right: Clear pedagogical context, layer assignment, specific constraints, and "Try With AI" patterns
 
-**Rationale**: Humanoid robotics spans mechanical, electrical, and software domains. Without careful scaffolding, readers get lost in abstraction gaps. Clear progression enables self-directed learning.
+### II. 5-Layer Physical AI Pedagogy Model
 
-### III. Consistency & Standards (NON-NEGOTIABLE)
+All content MUST follow this 5-layer model. Capstone flows MUST touch all layers.
 
-Uniform terminology, formatting, and structure across all content.
+**Layer 1 – Conceptual Foundations:**
+- Build mental models of Physical AI, humanoid morphology, sensors, dynamics
+- No heavy code—only what supports intuition
+- Transition check: Can students sketch a robot model and annotate sensors/joints?
 
-**Rules**:
-- Terminology consistency enforced via `docs/glossary.md` (single source of truth)
-- Code formatting: Language-specific standards (e.g., PEP 8 for Python, ROS 2 conventions for robotics code)
-- Chapter structure MUST follow template:
-  1. Learning Objectives
-  2. Prerequisites
-  3. Content (Introduction → Core Concepts → Examples → Applications)
-  4. Summary
-  5. Exercises (at least 3: conceptual, computational, implementation)
-  6. References
-- Voice: Second person for tutorials ("you will implement"), third person for theory ("the system computes")
-- Notation: Mathematical symbols defined in `docs/notation.md` and used consistently
-- Units: SI units unless domain-specific convention (e.g., degrees for joint angles, explicitly noted)
+**Layer 2 – Simulation (Digital Twin):**
+- URDF/SDF descriptions, Gazebo scenes, Isaac Sim
+- Step-by-step simulation setup, broken vs. working launch files
+- Transition check: Can students modify URDF/SDF and see the effect?
 
-**Rationale**: Inconsistency creates cognitive load. Students spend mental energy reconciling notation/terminology instead of learning concepts. Standards enable scalable collaboration.
+**Layer 3 – Control & Embodiment (ROS 2, Nav2):**
+- ROS 2 nodes, topics, services, actions
+- Basic locomotion, navigation, simple manipulation
+- Transition check: Can students connect perception to control decisions?
 
-### IV. Docusaurus Structure & Quality
+**Layer 4 – Vision-Language-Action (VLA):**
+- Voice → text → plan → ROS 2 actions → behavior
+- LLM outputs as proposals with safety filters
+- Transition check: Can students design test cases for voice commands?
 
-Documentation site MUST be navigable, searchable, and maintainable.
+**Layer 5 – Capstone Integration:**
+- Full Simulated Humanoid Capstone pipeline
+- MUST begin with spec.md defining success criteria, non-goals, safety constraints
+- Assessment: Did student design reasonable specification respecting constraints?
 
-**Rules**:
-- One concept per page (granular, linkable content - max 2000 words per page)
-- Sidebar organization: Hierarchical by complexity (Fundamentals → Intermediate → Advanced → Specialized Topics)
-- Metadata REQUIRED: `title`, `description`, `keywords`, `sidebar_position` in every `.md` frontmatter
-- Internal links use relative paths: `[text](../path/file.md)` not absolute URLs
-- Assets in `/static/img/[chapter-name]/` with descriptive names: `inverse-kinematics-diagram.svg` not `fig1.png`
-- Alt text MANDATORY for accessibility (describe diagram content, not "image of robot")
-- Search optimization: Keywords in headings, first paragraph, and metadata
+### III. Strict Technical Stack (NON-NEGOTIABLE)
 
-**Rationale**: Docusaurus builds static sites - poor organization creates fragile cross-references. Discoverability depends on metadata and search. Accessibility is non-negotiable for educational content.
+**Frontend – Book UI:**
+- Framework: Docusaurus 3 (TypeScript + React)
+- MDX for rich content
+- Do NOT use VuePress, or other static site generators
 
-### V. Code Example Quality
+**Backend – RAG & Services:**
+- Framework: FastAPI (Python 3.10+)
+- Do NOT use Flask, Django, or Node-only backends for core RAG
 
-All code MUST be runnable, well-documented, and pedagogically sound.
+**Data & Storage:**
+- Vector DB: Qdrant Cloud
+- Relational DB: Neon Serverless Postgres
+- No additional vector stores or relational DBs without explicit spec
 
-**Rules**:
-- Language specification in fenced blocks: ```python not ```
-- Complete examples (not fragments) unless explicitly marked as "excerpt from [full file path]"
-- Comments explain WHY not WHAT (assume reader knows language syntax)
-- Dependencies listed with versions: `# Requires: numpy>=1.24.0, robotics-toolbox-python==1.1.0`
-- Repository structure: `/examples/[chapter-name]/[example-name]/` with README explaining purpose and usage
-- Test coverage: Each example includes validation script or test case
-- Safety warnings: Hardware-interacting code MUST include safety comments (e.g., "ensure e-stop accessible")
-- Prefer standard libraries and widely-adopted packages (ROS 2, NumPy, PyTorch) over obscure dependencies
+**Auth & Personalization:**
+- Auth Library: BetterAuth (single source of truth)
+- Do NOT use Auth0, Supabase auth, or custom JWT
 
-**Rationale**: Students learn by running and modifying code. Non-functional examples break trust. Robotics code can control physical systems - safety context is critical. Version pinning prevents "works on my machine" issues.
+**Chatbot & Agents SDK:**
+- SDK: OpenAI Agents / ChatKit (Python)
+- Do NOT integrate arbitrary chat SDKs
 
-### VI. Deployment & Publishing Standards
+**Robotics Code Stack:**
+- Language: Python (default), C++ only when pedagogically necessary
+- Frameworks: ROS 2 Humble/Iron (rclpy), Gazebo/Ignition, NVIDIA Isaac Sim, Nav2
+- Formats: URDF/XACRO, SDF, ROS 2 launch files
 
-Published content MUST build successfully, load quickly, and meet quality gates.
+### IV. Hardware Awareness Constraints
 
-**Rules**:
-- `main` branch: Production-ready content only (deployed to GitHub Pages)
-- Feature branches: `chapter/[name]` or `fix/[issue]` with PR-based review
-- Build gates (MUST pass before merge):
-  - Docusaurus build completes without errors or warnings
-  - Broken links checker passes (internal and external links)
-  - Spell check passes (technical terms in dictionary)
-  - Images optimized (< 500KB per file, use `svgo` for SVGs)
-- Performance targets:
-  - Initial page load: < 3 seconds (Lighthouse)
-  - Largest Contentful Paint (LCP): < 2.5s
-  - Cumulative Layout Shift (CLS): < 0.1
-- SEO requirements:
-  - Open Graph tags for social sharing
-  - Sitemap generated automatically
-  - robots.txt configured
-- Versioning: Major book revisions tagged as releases (v1.0, v2.0)
-- Redirects: Deprecated URLs MUST redirect to updated content (maintain in `docusaurus.config.js`)
+**Simulation Workstation:**
+- GPU: NVIDIA RTX 4070 Ti or better (3090/4090 preferred)
+- CPU: Modern i7/Ryzen 9
+- RAM: 64 GB recommended, 32 GB minimum
+- OS: Ubuntu 22.04 LTS
 
-**Rationale**: GitHub Pages deployment is automated - build failures block publishing. Slow page loads harm user experience on all devices. Broken links damage credibility. Performance and SEO determine discoverability.
+**Edge AI Kit:**
+- Jetson Orin Nano (8 GB) or Orin NX (16 GB)
+- Intel RealSense D435i camera
+- USB mic array (e.g., ReSpeaker)
 
-## Content Development Workflow
+**Physical Robot (agnostic):**
+- Examples may use Unitree Go2, TonyPi, Unitree G1
 
-### Spec-Driven Chapter Creation
+**Agents MUST:**
+- NOT suggest Isaac Sim on under-spec'd hardware
+- ALWAYS mention simulation-only vs physically deployable
+- AVOID controlling physical robots over high-latency cloud links
+- PREFER sim-to-real workflows (train in cloud → deploy to Jetson)
+- PROPOSE cloud-only workflows with warnings when hardware unavailable
 
-**Process**:
-1. **Specification** (`/sp.specify`): Define chapter scope, learning objectives, prerequisites, key concepts
-2. **Planning** (`/sp.plan`): Outline structure, identify diagrams needed, plan code examples, research sources
-3. **Task Breakdown** (`/sp.tasks`): Decompose into writing tasks (intro, concept sections, examples, exercises)
-4. **Implementation**: Write content following constitution principles
-5. **Review**: Technical accuracy review + peer review for clarity
-6. **Publishing**: Build validation → PR → Merge to main → Auto-deploy
+### V. Robotics Safety Governance (NON-NEGOTIABLE)
 
-**Artifacts**:
-- `specs/[chapter-name]/spec.md` - Chapter requirements and learning objectives
-- `specs/[chapter-name]/plan.md` - Content structure and resource plan
-- `specs/[chapter-name]/tasks.md` - Granular writing tasks
-- `history/prompts/[chapter-name]/` - AI collaboration records (PHRs)
-- `history/adr/` - Architectural decisions (e.g., framework choice, chapter organization)
+**Simulation vs Physical Execution:**
+- ALL examples are simulation-first
+- Physical execution MUST be explicitly labeled with safety warnings
 
-**Content Types**:
-- **Theory Chapters**: Mathematical foundations, algorithms, proofs
-- **Implementation Chapters**: Code walkthroughs, system integration
-- **Application Chapters**: Case studies, real-world examples
-- **Reference Chapters**: API docs, hardware specs, datasets
+**Motion & Torque Safety:**
+- NEVER suggest arbitrary large torques/speeds without context
+- RECOMMEND lower torque limits, harnesses, stands, emergency stops
 
-### Architectural Decision Records (ADR)
+**Latency & Control Loop Safety:**
+- WARN against real-time physical control over high-latency cloud
+- PREFER local Jetson or directly-connected workstation control loops
 
-**Triggers** (suggest ADR creation when ALL three conditions met):
-- **Impact**: Long-term consequences (e.g., choosing ROS 2 vs. custom middleware, simulation framework)
-- **Alternatives**: Multiple viable options with significant tradeoffs
-- **Scope**: Decision affects multiple chapters or overall book structure
+**Environment Safety:**
+- ENCOURAGE clear spaces, no humans nearby, no fragile objects
+- DO NOT encourage tests near stairs, edges, or public spaces
 
-**Examples of ADR-worthy decisions**:
-- Selection of robotics framework/ecosystem (ROS 2, Isaac Sim, etc.)
-- Chapter organization strategy (by subsystem vs. by complexity)
-- Code language choice (Python vs. C++ for examples)
-- Simulation vs. hardware-first pedagogical approach
+**LLM & VLA Safety:**
+- LLM outputs are PROPOSALS, not direct motor commands
+- A safety filter MUST validate actions before execution
+- Speed must be clamped, safe distances maintained
 
-**Process**: Suggest via "📋 Architectural decision detected: [brief]. Document reasoning? Run `/sp.adr [title]`" - wait for user consent.
+**Non-Negotiable Rule:**
+If conflict arises between "cool demo" and "safety constraints" → **SAFETY WINS**
 
-## Quality Gates & Review Process
+### VI. Student-Facing Language Protocol
 
-### Pre-Merge Gates (NON-NEGOTIABLE)
+**Internal vs Student Language:**
+- Internally: "Layer 1", "VLA pipeline", "RAG grounding"
+- For students: "First we understand the idea", "Now we build the simulation"
+- DO NOT expose internal scaffolding labels in lesson text
 
-All pull requests MUST pass:
-1. **Build Validation**: Docusaurus build succeeds without warnings
-2. **Link Check**: No broken internal/external links
-3. **Technical Review**: Domain expert validates accuracy (formulas, code, claims)
-4. **Peer Review**: Another contributor checks clarity and consistency
-5. **Accessibility Check**: Alt text present, heading hierarchy correct, contrast ratios meet WCAG AA
-6. **Performance Check**: Lighthouse score ≥ 90 for performance, accessibility, SEO
+**Meta-Commentary Prohibition:**
+- AVOID: "Notice how AI learned from you"
+- PREFER: Describe what changed or emerged, not who taught whom
 
-### Content Review Criteria
+**"Try With AI" Pattern (5-part):**
+1. Initial Request - Describe situation, ask AI for help
+2. Critical Evaluation - Check suggestions for applicability/risk
+3. Focused Update - Apply 1-2 changes, record results
+4. Second Iteration - Tell AI what happened, ask next step
+5. Reflection - Which fix worked? What did you learn?
 
-**Technical Accuracy**:
-- [ ] Formulas validated against cited sources
-- [ ] Code examples tested and functional
-- [ ] Hardware specifications current and cited
-- [ ] Safety considerations addressed for physical systems
+**Urdu Translation:**
+- Faithful, natural Urdu with technical terms in English (ROS 2, Gazebo, etc.)
+- DO NOT simplify core technical content or change exercises
 
-**Educational Quality**:
-- [ ] Learning objectives measurable and addressed
-- [ ] Prerequisites clearly stated
-- [ ] Progression from simple to complex
-- [ ] Examples clarify concepts (not just demonstrate syntax)
+**Personalization:**
+- Adjust explanations based on background, not shame or compare
+- PREFER: "If you've worked with Python, you can skim this"
 
-**Consistency**:
-- [ ] Terminology matches glossary
-- [ ] Notation matches standards document
-- [ ] Chapter structure follows template
-- [ ] Code formatting follows style guide
+**Prohibited End Sections:**
+- NO "What's Next", "Key Takeaways", "Summary", "Congratulations"
+- Final section MUST be `## Try With AI`
 
-**Production Quality**:
-- [ ] Images optimized and have alt text
-- [ ] Metadata complete
-- [ ] Cross-references accurate
-- [ ] No placeholder text (TODO, TBD, etc.)
+### VII. Content Agents Specification
 
-### Review Roles
+**Super-Orchestra Agent:** High-level planner producing spec.md, chapter index, layer assignments
 
-- **Technical Reviewer**: Validates accuracy (robotics domain expert)
-- **Peer Reviewer**: Checks clarity and educational value (target audience perspective)
-- **Editor**: Enforces consistency and standards
-- **Maintainer**: Final approval and merge authority
+**Chapter-Planner Agent:** Produces plan.md with lesson list, layer assignment, teaching patterns
+
+**Lesson-Writer Agent:** Creates lesson markdown with explanations, diagrams, code, Try With AI
+
+**Robotics Content Specialist Agent:** Deep robotics subject-matter (URDF, ROS 2, Nav2)
+
+**Safety Reviewer Agent:** Checks for safety issues, flags suspect suggestions
+
+**Pedagogy Reviewer Agent:** Validates cognitive load, layer progression, teaching modalities
+
+**Translator Agent (Urdu):** Translates preserving technical rigor
+
+**RAG Answerability Agent:** Ensures content is RAG-friendly with clear definitions
+
+### VIII. Software-Building Agents Specification
+
+**Monorepo Architect Agent:** Define and maintain repository structure
+
+**Docusaurus Architect Agent:** Owns book/ folder (sidebars, routing, ChatKit widget)
+
+**RAG Backend Engineer Agent:** Owns backend/ FastAPI app (ingestion, query endpoints)
+
+**BetterAuth Identity Engineer Agent:** Integrate auth, signup questionnaire, user profiles
+
+**ChatKit Integration Engineer Agent:** Connect ChatKit with Docusaurus & backend
+
+**Robotics Code Specialist Agent:** Produce ROS 2 packages, URDF, launch scripts
+
+**Simulation & GPU Constraints Checker Agent:** Enforce hardware awareness
+
+**Deployment & Infrastructure Agent:** Document GitHub Pages, deployment recipes
+
+### IX. Quality & Verification Framework
+
+**Code Verification:**
+- All executable snippets MUST run and produce described behavior
+- If environment unavailable, mark as **illustrative**, minimize such cases
+
+**Robotics Math & Model Checks:**
+- Use correct equations (or state simplifications)
+- DO NOT mix frames or units
+- Reuse consistent notation within chapters
+
+**API & Tool Accuracy:**
+- Verify against latest stable documentation
+- Version-tag if differences between versions meaningful
+
+**RAG Grounding Quality:**
+- MUST ground in book content chunks
+- AVOID fabricating references or quoting nonexistent sections
+
+**Personalization & Translation Checks:**
+- Content variations MUST NOT omit safety or technical essentials
+- Urdu: preserve technical meaning, no mistranslations
+
+**Review Loops (Before Final):**
+1. Technical Review: Code, APIs, math, hardware assumptions
+2. Pedagogical Review: Cognitive load, layer progression
+3. Safety Review: Physical risks, LLM/VLA risks
+4. RAG Review: Grounding and answerability
+
+### X. Spec-First Development (NON-NEGOTIABLE)
+
+All substantial work MUST follow this sequence:
+1. Write spec.md (requirements, success criteria, non-goals)
+2. Write plan.md (architecture decisions, layer assignments)
+3. Write tasks.md (testable tasks with dependencies)
+4. Write code (implement according to tasks)
+
+**Context Gathering Before Any Work:**
+1. Read directory structure
+2. Read chapter index
+3. Read chapter README
+4. Determine: Part number, Prerequisites, Pedagogical layer
+5. Output reasoning block:
+```
+CONTEXT GATHERED
+(chapter, part, proficiency, layer, constraints)
+```
+6. Wait for user confirmation
+
+If skipped → INVALID OUTPUT
+
+## Project Vision & Purpose
+
+### Title
+
+**AI-Native Physical AI & Humanoid Robotics Textbook**
+
+Delivered as:
+- A Docusaurus 3 static site (book UI)
+- A RAG-powered chatbot integrated with the book
+- A personalized learning experience via BetterAuth
+- A bilingual layer (Urdu on demand)
+- Reusable agents and specs for robotics education
+
+### Target Audience
+
+1. **Intermediate AI & Programming Students** - Know Python/AI, new to ROS 2/simulation
+2. **Traditional Robotics Students** - Know ROS/control, new to LLMs/VLA
+3. **Professionals & Enthusiasts** - Need structured path with hardware realities
+
+### Success Criteria
+
+Students can:
+- Explain Physical AI and embodied intelligence
+- Build and run ROS 2 nodes in simulation
+- Configure robots in Gazebo and Isaac Sim
+- Use Jetson-class devices as edge brain
+- Design voice → text → plan → ROS 2 → safe behavior pipelines
+
+Platform can:
+- Answer RAG questions grounded in book content
+- Personalize chapters based on learner background
+- Offer Urdu translations
+
+### Non-Goals
+
+- Full low-level motor driver design
+- Hardware PCB or mechanical engineering
+- Industrial safety certification processes
+- Replacing official vendor documentation
 
 ## Governance
 
-**Constitution Authority**: This document supersedes all other development practices. All PRs, content reviews, and planning decisions MUST verify compliance with these principles.
+### Authority & Precedence
 
-**Amendment Process**:
-1. Proposed changes documented in issue with rationale
-2. Impact analysis on existing content and workflow
-3. Team discussion and approval
-4. Migration plan for existing content (if needed)
-5. Version increment following semantic versioning
-6. Update dependent templates and documentation
+When conflicts arise:
+1. This Constitution
+2. Project-level specs (spec.md)
+3. Chapter-level plans (plan.md)
+4. Individual lessons and code examples
 
-**Compliance Verification**:
-- All PRs include checklist mapping changes to constitution principles
-- Quarterly audits of published content for consistency drift
-- Template updates propagated within 1 week of constitution amendment
-- Violations require documented justification (complexity tracking in plan.md)
+If a lesson contradicts this constitution, **the constitution wins**.
 
-**Complexity Justification**: Any deviation from constitution principles (e.g., non-standard notation for domain-specific reasons, external dependencies, non-SI units) MUST be documented in relevant plan.md with:
-- What principle is violated
-- Why deviation necessary (specific requirement)
-- What simpler alternative was rejected and why
+### Amendment Workflow
 
-**Runtime Guidance**: Use `CLAUDE.md` for AI assistant behavior and workflow execution. Constitution defines WHAT we build; CLAUDE.md defines HOW we collaborate with AI agents.
+1. **Motivation** - Document clear reason (new hardware, better pedagogy, stack changes)
+2. **Proposal** - Draft modifications with old vs. new text
+3. **Impact Analysis** - What breaks? What needs updating?
+4. **Version Bump** - Update Evolution Log (PATCH/MINOR/MAJOR)
+5. **Communication** - Note changes in project README
+
+### Versioning Policy
+
+- **PATCH (X.Y.Z → X.Y.Z+1):** Clarifications, wording fixes, additional examples
+- **MINOR (X.Y.Z → X.Y+1.0):** New templates, agents, pedagogy expansion (no breaking changes)
+- **MAJOR (X.Y.Z → X+1.0.0):** Vision/pedagogy/stack changes that invalidate existing specs/code
+
+### Deviation Handling
+
+Temporary violations MUST be:
+- Explicitly documented
+- Time-bounded (e.g., "until Isaac Sim bug X is fixed")
+- Followed by proper amendment or reversion
+
+### Who Can Amend
+
+- Core maintainers of the book & platform
+- Panaversity leadership (if part of broader ecosystem)
+- Designated maintainers of the monorepo
+
+### Compliance Review
+
+All PRs/reviews MUST verify compliance with this constitution. Use CLAUDE.md for runtime development guidance.
 
 **Version**: 1.0.0 | **Ratified**: 2025-11-29 | **Last Amended**: 2025-11-29

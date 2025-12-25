@@ -1,9 +1,7 @@
-'use client';
-
 import type { Metadata } from "next";
 import { Inter } from 'next/font/google';
 import "./globals.css";
-import { SessionProvider } from '@/lib/providers/session-provider';
+import { SessionProviderWrapper } from './session-provider-wrapper';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SessionProvider>
+        <SessionProviderWrapper>
           {children}
           {/* Floating Chatbot Icon */}
           <div className="fixed bottom-6 right-6 z-50">
@@ -30,7 +28,7 @@ export default function RootLayout({
               </svg>
             </button>
           </div>
-        </SessionProvider>
+        </SessionProviderWrapper>
       </body>
     </html>
   );

@@ -2,7 +2,7 @@
   "name": "RoboGenesis AI",
   "version": "0.1.0",
   "private": true,
-  "description": "AI-Native Physical AI & Humanoid Robotics Textbook",
+  "description": "RoboGenesis AI Physical AI & Humanoid Robotics Textbook",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",

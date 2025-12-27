@@ -24,7 +24,7 @@ tests:
 
 ## Prompt
 
-you need to create constitution for this project for that u need to read the content in the folder /home/dell/robo-genesis-ai/physical_ai_constitution_full create it as detailed as possible
+you need to create constitution for this project for that you need to read the content in the folder /home/robo-genesis-ai/physical_ai_constitution create it as detailed as possible.
 
 ## Response snapshot
 

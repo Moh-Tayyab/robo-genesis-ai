@@ -36,6 +36,31 @@ class User(Base):
         Boolean,
         default=False,
     )
+    email: Mapped[str] = mapped_column(
+        String(255),
+        unique=True,
+        index=True,
+    )
+    email_verified: Mapped[bool] = mapped_column(
+        Boolean,
+        default=False,
+    )
+    is_active: Mapped[bool] = mapped_column(
+        Boolean,
+        default=True,
+    )
+    is_superuser: Mapped[bool] = mapped_column(
+        Boolean,
+        default=False,
+    )
+    name: Mapped[Optional[str]] = mapped_column(
+        Text,
+        nullable=True,
+    )
+    image: Mapped[Optional[str]] = mapped_column(
+        Text,
+        nullable=True,
+    )
 
     # Relationships
     preferences: Mapped[Optional["UserPreferences"]] = relationship(

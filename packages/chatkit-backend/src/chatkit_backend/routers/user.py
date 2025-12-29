@@ -41,7 +41,18 @@ async def create_user(
         )
 
     # Create new user
-    user = User(id=request.user_id, onboarding_completed=False)
+    # Generate dummy email strictly for anonymous users to satisfy DB NotNull constraint
+    dummy_email = f"anonymous-{request.user_id}@chatkit.local"
+    user = User(
+        id=request.user_id,
+        email=dummy_email,
+        onboarding_completed=False,
+        is_active=True,
+        is_superuser=False,
+        email_verified=False,
+        name="Anonymous User",
+        image=None
+    )
     session.add(user)
     await session.flush()
     await session.refresh(user)
